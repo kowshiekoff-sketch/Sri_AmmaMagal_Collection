@@ -26,10 +26,8 @@ footer{background:#8B0000;color:white;text-align:center;padding:10px}
 .hero{background:url('https://images.unsplash.com/photo-1445205170230-053b83016050');background-size:cover;color:white;text-align:center;padding:100px 20px}
 .hero h1{font-size:40px}
 
-/* LOGIN PAGE */
-#loginPage{display:none;text-align:center;padding:50px}
+#loginPage{text-align:center;padding:50px;display:none}
 #loginPage input{padding:10px;margin:10px;width:250px}
-
 </style>
 </head>
 <body>
@@ -41,6 +39,7 @@ footer{background:#8B0000;color:white;text-align:center;padding:10px}
 </div>
 <div class="auth-buttons">
 <button onclick="showLogin()">Login</button>
+<button onclick="signupUser()">Signup</button>
 </div>
 </header>
 
@@ -90,9 +89,8 @@ footer{background:#8B0000;color:white;text-align:center;padding:10px}
 </div>
 </div>
 
-<!-- LOGIN PAGE -->
 <div id="loginPage">
-<h2>Login</h2>
+<h2>Login / Signup</h2>
 <input type="text" id="phone" placeholder="Phone Number"><br>
 <input type="password" id="password" placeholder="Password"><br>
 <button onclick="loginUser()">Login</button>
@@ -104,9 +102,9 @@ footer{background:#8B0000;color:white;text-align:center;padding:10px}
 
 <script>
 
-let users=[
-{phone:"919790401824",password:"1234",history:["Saree ₹1500","T-Shirt ₹800"]}
-];
+// Load users from localStorage
+let users = JSON.parse(localStorage.getItem('users')) || [];
+let currentUser = null;
 
 function showSection(id){
 document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
@@ -119,6 +117,21 @@ document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
 document.getElementById('loginPage').style.display='block';
 }
 
+function signupUser(){
+let phone=prompt("Enter Phone Number");
+let pass=prompt("Create Password");
+
+if(users.find(u=>u.phone===phone)){
+alert("User already exists");
+return;
+}
+
+let newUser={phone:phone,password:pass,history:[]};
+users.push(newUser);
+localStorage.setItem('users',JSON.stringify(users));
+alert("Signup successful! Now login");
+}
+
 function loginUser(){
 let phone=document.getElementById('phone').value;
 let pass=document.getElementById('password').value;
@@ -126,6 +139,8 @@ let pass=document.getElementById('password').value;
 let user=users.find(u=>u.phone===phone && u.password===pass);
 
 if(user){
+currentUser=user;
+localStorage.setItem('currentUser',JSON.stringify(user));
 alert("Login Successful ✅");
 showSection('collection');
 
@@ -142,6 +157,17 @@ function orderWhatsApp(product,price){
 let phone="919790401824";
 let message=`Hello, I want to order ${product} for ₹${price}`;
 window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`);
+
+// save history
+let savedUser=JSON.parse(localStorage.getItem('currentUser'));
+if(savedUser){
+savedUser.history.push(product+" ₹"+price);
+
+// update users list
+users=users.map(u=>u.phone===savedUser.phone?savedUser:u);
+localStorage.setItem('users',JSON.stringify(users));
+localStorage.setItem('currentUser',JSON.stringify(savedUser));
+}
 }
 
 </script>
