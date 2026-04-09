@@ -5,169 +5,173 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sri AmmaMagal Collection</title>
 
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+
 <style>
-body {margin:0;font-family:'Segoe UI',sans-serif;background:#f5f5f5}
-header {background:#8B0000;color:white;padding:15px 30px;display:flex;justify-content:space-between;align-items:center}
+body{margin:0;font-family:'Segoe UI',sans-serif;background:#f5f5f5}
+header{background:#8B0000;color:white;padding:15px 30px;display:flex;justify-content:space-between;align-items:center}
 .logo{display:flex;align-items:center}
-.logo img{height:110px;margin-right:10px}
-.auth-buttons button{margin-left:10px;padding:8px 15px;border:none;background:white;color:#8B0000;font-weight:bold;border-radius:5px;cursor:pointer}
 nav{background:#222;padding:12px;text-align:center}
-nav a{color:white;margin:0 15px;text-decoration:none;font-weight:bold}
-.section{display:none;padding:40px}
+nav a{color:white;margin:0 15px;text-decoration:none}
+.section{display:none;padding:30px}
 .active{display:block}
 .products{display:flex;flex-wrap:wrap;justify-content:center}
-.card{background:white;width:260px;margin:15px;border-radius:12px;overflow:hidden;box-shadow:0 4px 10px rgba(0,0,0,0.1);transition:0.3s}
-.card:hover{transform:scale(1.05)}
-.card img{width:100%;height:300px;object-fit:cover}
-.card-content{padding:15px;text-align:center}
+.card{background:white;width:250px;margin:15px;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,.1)}
+.card img{width:100%;height:250px;object-fit:cover}
+.card-content{text-align:center;padding:10px}
 .price{color:green;font-weight:bold}
-.order-btn{background:#25D366;color:white;border:none;padding:10px;margin-top:10px;width:100%;border-radius:5px;cursor:pointer}
-footer{background:#8B0000;color:white;text-align:center;padding:10px}
-.hero{background:url('https://images.unsplash.com/photo-1445205170230-053b83016050');background-size:cover;color:white;text-align:center;padding:100px 20px}
-.hero h1{font-size:40px}
-
-#loginPage{text-align:center;padding:50px;display:none}
-#loginPage input{padding:10px;margin:10px;width:250px}
+button{padding:8px;margin:5px;border:none;border-radius:5px;cursor:pointer}
+.cart-btn{background:#ff9800;color:white}
+.order-btn{background:#25D366;color:white}
+#profile{background:white;padding:20px;margin:20px;border-radius:10px}
 </style>
 </head>
 <body>
 
 <header>
-<div class="logo">
-<img src="logo.jpg">
-<h1>Sri AmmaMagal Collection</h1>
-</div>
-<div class="auth-buttons">
-<button onclick="showLogin()">Login</button>
-<button onclick="signupUser()">Signup</button>
+<div class="logo"><h2>Sri AmmaMagal</h2></div>
+<div>
+<button onclick="showLogin()">Login / Signup</button>
+<button onclick="logout()">Logout</button>
 </div>
 </header>
 
 <nav>
 <a href="#" onclick="showSection('home')">Home</a>
-<a href="#" onclick="showSection('collection')">Shop</a>
+<a href="#" onclick="showSection('shop')">Shop</a>
+<a href="#" onclick="showSection('profile')">Profile</a>
 </nav>
 
-<div id="home" class="section active">
-<div class="hero">
-<h1>Elegant Fashion for Every Occasion</h1>
-<p>Shop the latest trends now</p>
-</div>
+<div id="home" class="section active"><h2>Welcome</h2></div>
+
+<div id="shop" class="section">
+<h2>Products</h2>
+<div class="products" id="productList"></div>
 </div>
 
-<div id="collection" class="section">
-<h2 style="text-align:center">Our Collection</h2>
-<div class="products">
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c">
-<div class="card-content">
-<h3>Saree</h3>
-<p class="price">₹1500</p>
-<button class="order-btn" onclick="orderWhatsApp('Saree',1500)">Order on WhatsApp</button>
-</div>
+<div id="profile" class="section">
+<h2>Your Profile</h2>
+<p id="userInfo"></p>
+<h3>Your Orders</h3>
+<div id="orderHistory"></div>
 </div>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3">
-<div class="card-content">
-<h3>T-Shirt & Jeans</h3>
-<p class="price">₹800</p>
-<button class="order-btn" onclick="orderWhatsApp('T-Shirt & Jeans',800)">Order on WhatsApp</button>
-</div>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956">
-<div class="card-content">
-<h3>Evening Gown</h3>
-<p class="price">₹3000</p>
-<button class="order-btn" onclick="orderWhatsApp('Evening Gown',3000)">Order on WhatsApp</button>
-</div>
-</div>
-
-</div>
-</div>
-
-<div id="loginPage">
+<!-- LOGIN + SIGNUP PAGE -->
+<div id="loginPage" class="section">
 <h2>Login / Signup</h2>
-<input type="text" id="phone" placeholder="Phone Number"><br>
+<input type="email" id="email" placeholder="Email"><br>
 <input type="password" id="password" placeholder="Password"><br>
-<button onclick="loginUser()">Login</button>
+<button onclick="login()">Login</button>
+<button onclick="signup()">Signup</button>
 </div>
-
-<footer>
-<p>© 2026 Sri AmmaMagal Collection</p>
-</footer>
 
 <script>
 
-// Load users from localStorage
-let users = JSON.parse(localStorage.getItem('users')) || [];
-let currentUser = null;
+// Firebase config
+const firebaseConfig={
+apiKey:"YOUR_API_KEY",
+authDomain:"YOUR_DOMAIN",
+projectId:"YOUR_PROJECT_ID"
+};
+firebase.initializeApp(firebaseConfig);
+const auth=firebase.auth();
+const db=firebase.firestore();
+
+let currentUser=null;
+
+// Products
+const products=[
+{id:1,name:'Saree',price:1500,img:'https://images.unsplash.com/photo-1610030469983-98e550d6193c'},
+{id:2,name:'T-Shirt',price:800,img:'https://images.unsplash.com/photo-1525507119028-ed4c629a60a3'}
+];
+
+function displayProducts(){
+let html='';
+products.forEach(p=>{
+html+=`<div class='card'>
+<img src='${p.img}'>
+<div class='card-content'>
+<h3>${p.name}</h3>
+<p class='price'>₹${p.price}</p>
+<button class='cart-btn' onclick='addToCart(${p.id})'>Add to Cart</button>
+<button class='order-btn' onclick='order(${p.id})'>Order</button>
+</div></div>`;
+});
+document.getElementById('productList').innerHTML=html;
+}
+
+displayProducts();
 
 function showSection(id){
 document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
 document.getElementById(id).classList.add('active');
-document.getElementById('loginPage').style.display='none';
 }
 
-function showLogin(){
-document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-document.getElementById('loginPage').style.display='block';
-}
+function showLogin(){showSection('loginPage');}
 
-function signupUser(){
-let phone=prompt("Enter Phone Number");
-let pass=prompt("Create Password");
-
-if(users.find(u=>u.phone===phone)){
-alert("User already exists");
-return;
-}
-
-let newUser={phone:phone,password:pass,history:[]};
-users.push(newUser);
-localStorage.setItem('users',JSON.stringify(users));
-alert("Signup successful! Now login");
-}
-
-function loginUser(){
-let phone=document.getElementById('phone').value;
+// SIGNUP
+function signup(){
+let email=document.getElementById('email').value;
 let pass=document.getElementById('password').value;
 
-let user=users.find(u=>u.phone===phone && u.password===pass);
+if(!email || !pass){alert("Enter email & password");return}
 
-if(user){
-currentUser=user;
-localStorage.setItem('currentUser',JSON.stringify(user));
-alert("Login Successful ✅");
-showSection('collection');
-
-if(user.history.length>0){
-alert("Your Previous Orders:\n"+user.history.join("\n"));
+auth.createUserWithEmailAndPassword(email,pass)
+.then(()=>{
+alert('Signup successful ✅ Now login');
+})
+.catch(err=>alert(err.message));
 }
 
-}else{
-alert("Invalid Phone or Password ❌");
-}
+// LOGIN
+function login(){
+let email=document.getElementById('email').value;
+let pass=document.getElementById('password').value;
+
+auth.signInWithEmailAndPassword(email,pass)
+.then(user=>{
+currentUser=user.user;
+alert('Login Successful ✅');
+loadProfile();
+showSection('shop');
+})
+.catch(err=>alert(err.message));
 }
 
-function orderWhatsApp(product,price){
-let phone="919790401824";
-let message=`Hello, I want to order ${product} for ₹${price}`;
-window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`);
-
-// save history
-let savedUser=JSON.parse(localStorage.getItem('currentUser'));
-if(savedUser){
-savedUser.history.push(product+" ₹"+price);
-
-// update users list
-users=users.map(u=>u.phone===savedUser.phone?savedUser:u);
-localStorage.setItem('users',JSON.stringify(users));
-localStorage.setItem('currentUser',JSON.stringify(savedUser));
+function logout(){
+auth.signOut();
+currentUser=null;
+alert('Logged out');
+showSection('home');
 }
+
+// Cart per user
+async function addToCart(id){
+if(!currentUser){alert('Login first');return}
+let item=products.find(p=>p.id===id);
+await db.collection('users').doc(currentUser.uid).collection('cart').add(item);
+alert('Added to cart');
+}
+
+// Order + save history
+async function order(id){
+if(!currentUser){alert('Login first');return}
+let item=products.find(p=>p.id===id);
+await db.collection('users').doc(currentUser.uid).collection('orders').add(item);
+alert('Order placed');
+loadProfile();
+}
+
+// Profile
+async function loadProfile(){
+document.getElementById('userInfo').innerText=currentUser.email;
+let snapshot=await db.collection('users').doc(currentUser.uid).collection('orders').get();
+let html='';
+snapshot.forEach(doc=>{let d=doc.data();html+=`<p>${d.name} - ₹${d.price}</p>`});
+document.getElementById('orderHistory').innerHTML=html;
 }
 
 </script>
