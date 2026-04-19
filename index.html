@@ -6,6 +6,7 @@
 <title>Sri AmmaMagal Collections</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:wght@300;400;500;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
   :root {
     --gold: #c9922a; --gold-light: #e8c07a; --deep: #1a0a00; --cream: #fdf6ec;
@@ -38,7 +39,6 @@
   .cart-btn { position: relative; }
   .cart-count { position: absolute; top: -6px; right: -6px; background: var(--rose); color: #fff; border-radius: 50%; width: 18px; height: 18px; font-size: 0.65rem; display: flex; align-items: center; justify-content: center; font-weight: 700; }
 
-  /* FIX: user-menu controlled via CSS class, not fragile inline display:none/flex */
   #user-menu { display: none; align-items: center; gap: 6px; }
   #user-menu.visible { display: flex; }
 
@@ -46,7 +46,6 @@
   nav a { color: #d4b896; font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 500; letter-spacing: 1.5px; text-decoration: none; text-transform: uppercase; transition: color 0.2s; cursor: pointer; }
   nav a:hover, nav a.active { color: var(--gold-light); border-bottom: 1px solid var(--gold); }
 
-  /* FIX: hero backgrounds in CSS classes — no broken escaped-quote inline styles */
   .hero { color: var(--cream); text-align: center; padding: 80px 20px; position: relative; overflow: hidden; }
   .hero-women { background: linear-gradient(160deg, #2e0d05 0%, #5a1a10 40%, #8b3a20 100%); }
   .hero-men   { background: linear-gradient(160deg, #0a1020 0%, #1a2a50 40%, #2a3a70 100%); }
@@ -120,6 +119,64 @@
   .empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
   .empty-state .icon { font-size: 3.5rem; margin-bottom: 14px; }
 
+  /* ── PAYMENT TABS ── */
+  .pay-tabs { display: flex; gap: 0; margin-bottom: 20px; border-radius: 8px; overflow: hidden; border: 1.5px solid var(--gold); }
+  .pay-tab {
+    flex: 1; padding: 10px 8px; text-align: center; cursor: pointer;
+    font-family: 'Lato', sans-serif; font-size: 0.8rem; font-weight: 700;
+    letter-spacing: 0.8px; text-transform: uppercase;
+    background: transparent; color: var(--gold); border: none;
+    transition: all 0.2s; line-height: 1.3;
+  }
+  .pay-tab:not(:last-child) { border-right: 1.5px solid var(--gold); }
+  .pay-tab.active { background: var(--gold); color: var(--deep); }
+  .pay-tab:hover:not(.active) { background: rgba(201,146,42,0.12); }
+  .pay-tab-icon { display: block; font-size: 1.2rem; margin-bottom: 2px; }
+
+  .pay-panel { display: none; }
+  .pay-panel.active { display: block; }
+
+  /* ── QR PANEL ── */
+  .qr-section { text-align: center; padding: 4px 0 10px; }
+  .qr-box {
+    display: inline-block; padding: 16px; background: #fff;
+    border: 3px solid var(--gold); border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(201,146,42,0.2);
+    margin: 0 auto 14px;
+  }
+  .qr-box canvas, .qr-box img { display: block; }
+  .qr-upi-id {
+    background: #fdf6ec; border: 1px solid var(--border); border-radius: 8px;
+    padding: 10px 14px; margin: 10px 0; font-size: 0.88rem;
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  }
+  .qr-upi-id strong { color: var(--deep); font-size: 0.95rem; letter-spacing: 0.5px; }
+  .copy-btn {
+    background: var(--gold); color: var(--deep); border: none; border-radius: 4px;
+    padding: 4px 10px; font-size: 0.72rem; font-weight: 700; cursor: pointer;
+    letter-spacing: 0.5px; transition: background 0.2s; white-space: nowrap;
+  }
+  .copy-btn:hover { background: var(--gold-light); }
+  .qr-steps { text-align: left; background: #f9f9f9; border-radius: 8px; padding: 12px 14px; margin: 10px 0; }
+  .qr-steps ol { padding-left: 18px; }
+  .qr-steps li { font-size: 0.82rem; color: var(--muted); margin-bottom: 5px; line-height: 1.5; }
+  .qr-steps li strong { color: var(--text); }
+  .qr-amount-badge {
+    display: inline-block; background: linear-gradient(135deg, var(--rose), #c05060);
+    color: #fff; font-size: 1.1rem; font-weight: 700; padding: 6px 20px;
+    border-radius: 20px; margin: 8px 0 4px; letter-spacing: 0.5px;
+  }
+  .qr-confirm-btn {
+    width: 100%; padding: 11px; margin-top: 12px; font-size: 0.9rem;
+    background: var(--success); color: #fff; border: none; border-radius: 6px;
+    font-weight: 700; cursor: pointer; letter-spacing: 1px;
+    transition: background 0.2s; font-family: 'Lato', sans-serif;
+  }
+  .qr-confirm-btn:hover { background: #236040; }
+  .qr-note { font-size: 0.75rem; color: var(--muted); margin-top: 8px; line-height: 1.5; }
+  .qr-loading { padding: 30px; color: var(--muted); font-size: 0.88rem; }
+
+  /* ── RAZORPAY PANEL ── */
   .razorpay-info { background: #fff8e8; border: 1px solid #e8c07a; border-radius: 8px; padding: 14px 16px; margin-bottom: 18px; }
   .razorpay-info h4 { color: var(--deep); font-size: 0.88rem; font-weight: 700; margin-bottom: 6px; }
   .razorpay-info p { color: var(--muted); font-size: 0.8rem; line-height: 1.6; }
@@ -134,7 +191,6 @@
   .status-pending   { background: #fff3cd; color: #7a5500; }
   .status-confirmed { background: #d4edda; color: #155724; }
   .status-shipped   { background: #cce5ff; color: #004085; }
-  /* FIX: added missing status classes for delivered and cancelled */
   .status-delivered { background: #c3f0d4; color: #0a3d1a; }
   .status-cancelled { background: #f8d7da; color: #721c24; }
   .order-items { padding: 16px 20px; }
@@ -157,6 +213,11 @@
   .spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; margin-right: 8px; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
+  /* QR success pulse */
+  @keyframes pulse { 0%,100%{box-shadow:0 0 0 0 rgba(45,122,79,0.4)} 50%{box-shadow:0 0 0 10px rgba(45,122,79,0)} }
+  .qr-confirm-btn.pulse-anim { animation: pulse 1.5s infinite; }
+  @keyframes bounceIn { 0%{transform:scale(0.3);opacity:0} 60%{transform:scale(1.15)} 80%{transform:scale(0.95)} 100%{transform:scale(1);opacity:1} }
+
   @media(max-width:640px) {
     .logo-area h1 { font-size: 1.3rem; }
     .hero h2 { font-size: 2rem; }
@@ -166,6 +227,7 @@
     nav { gap: 14px; }
     nav a { font-size: 0.85rem; }
     .pay-methods-grid { grid-template-columns: repeat(2, 1fr); }
+    .pay-tab { font-size: 0.72rem; padding: 8px 4px; }
   }
 </style>
 </head>
@@ -186,7 +248,6 @@
         <button class="btn btn-outline btn-sm" onclick="openModal('login')">Login</button>
         <button class="btn btn-gold btn-sm" onclick="openModal('register')">Register</button>
       </div>
-      <!-- FIX: visibility controlled via CSS class .visible, not broken inline style -->
       <div id="user-menu">
         <span id="user-greeting" style="color:var(--gold-light);font-size:0.85rem;font-family:'Cormorant Garamond',serif;"></span>
         <button class="btn btn-outline btn-sm" onclick="goPage('profile')">Profile</button>
@@ -255,7 +316,7 @@
   </div>
 </div>
 
-<!-- MEN'S SHOP — FIX: hero uses CSS class, no broken inline background with escaped quotes -->
+<!-- MEN'S SHOP -->
 <div id="page-men" class="page">
   <div class="hero hero-men" style="padding:60px 20px;">
     <h2>Men's Royal Collection</h2>
@@ -335,18 +396,10 @@
   <div class="modal" style="max-width:520px;">
     <button class="modal-close" onclick="closePayModal()">✕</button>
     <h2>Checkout 💳</h2>
-    <p class="sub">Powered by Razorpay — India's #1 payment gateway</p>
+    <p class="sub">Choose your preferred payment method</p>
     <div id="pay-alert"></div>
-    <div class="razorpay-info">
-      <h4>🔒 Secure Real-Time Payment via Razorpay</h4>
-      <p>Your payment is processed securely. We accept UPI, Credit/Debit Cards, Net Banking, Wallets and more.</p>
-      <div class="pay-methods-grid">
-        <div class="pay-chip">📱 UPI</div>
-        <div class="pay-chip">💳 Cards</div>
-        <div class="pay-chip">🏦 Net Banking</div>
-        <div class="pay-chip">👛 Wallets</div>
-      </div>
-    </div>
+
+    <!-- Order Summary (always visible) -->
     <div style="background:#fdf6ec;border-radius:8px;padding:14px;margin-bottom:18px;border:1px solid var(--border);">
       <div style="font-weight:700;font-size:0.9rem;margin-bottom:8px;color:var(--deep);">Order Summary</div>
       <div id="pay-order-summary"></div>
@@ -354,18 +407,127 @@
         <span>Total Amount</span><span id="pay-total" style="color:var(--rose);"></span>
       </div>
     </div>
-    <div class="form-group"><label>Full Name</label><input type="text" id="pay-name" placeholder="Your full name"/></div>
-    <div class="form-group"><label>Phone Number</label><input type="tel" id="pay-phone" placeholder="+91 98765 43210"/></div>
-    <div class="form-group"><label>Delivery Address</label><textarea id="pay-address" rows="2" placeholder="Enter your full delivery address..."></textarea></div>
-    <div class="alert alert-info" style="font-size:0.8rem;margin-bottom:16px;">
-      ℹ️ To go live, replace the Razorpay Key ID in the script with your key from
-      <a href="https://dashboard.razorpay.com" target="_blank" style="color:var(--gold);">dashboard.razorpay.com</a>.
-      Use <code>rzp_test_...</code> for testing, <code>rzp_live_...</code> for production.
+
+    <!-- Delivery Details (shared across both tabs) -->
+    <div id="delivery-fields">
+      <div class="form-group"><label>Full Name</label><input type="text" id="pay-name" placeholder="Your full name"/></div>
+      <div class="form-group"><label>Phone Number</label><input type="tel" id="pay-phone" placeholder="+91 98765 43210"/></div>
+      <div class="form-group"><label>Delivery Address</label><textarea id="pay-address" rows="2" placeholder="Enter your full delivery address..."></textarea></div>
     </div>
-    <button class="btn btn-gold" style="width:100%;padding:12px;font-size:1rem;" id="pay-btn" onclick="initiateRazorpay()">
-      Pay with Razorpay →
-    </button>
-    <p style="text-align:center;font-size:0.75rem;color:var(--muted);margin-top:10px;">🔒 256-bit SSL encrypted · PCI DSS compliant</p>
+
+    <!-- Payment Method Tabs -->
+    <div style="margin-bottom:6px;font-size:0.8rem;font-weight:700;color:var(--muted);letter-spacing:0.5px;">SELECT PAYMENT METHOD</div>
+    <div class="pay-tabs">
+      <button class="pay-tab active" onclick="switchPayTab('razorpay',this)">
+        <span class="pay-tab-icon">💳</span>Razorpay
+      </button>
+      <button class="pay-tab" onclick="switchPayTab('qr',this)">
+        <span class="pay-tab-icon">📱</span>UPI QR Code
+      </button>
+    </div>
+
+    <!-- Razorpay Panel -->
+    <div class="pay-panel active" id="panel-razorpay">
+      <div class="razorpay-info">
+        <h4>🔒 Secure Real-Time Payment via Razorpay</h4>
+        <p>Your payment is processed securely. We accept UPI, Credit/Debit Cards, Net Banking, Wallets and more.</p>
+        <div class="pay-methods-grid">
+          <div class="pay-chip">📱 UPI</div>
+          <div class="pay-chip">💳 Cards</div>
+          <div class="pay-chip">🏦 Net Banking</div>
+          <div class="pay-chip">👛 Wallets</div>
+        </div>
+      </div>
+      <div class="alert alert-info" style="font-size:0.8rem;margin-bottom:16px;">
+        ℹ️ To go live, replace the Razorpay Key ID in the script with your key from
+        <a href="https://dashboard.razorpay.com" target="_blank" style="color:var(--gold);">dashboard.razorpay.com</a>.
+        Use <code>rzp_test_...</code> for testing, <code>rzp_live_...</code> for production.
+      </div>
+      <button class="btn btn-gold" style="width:100%;padding:12px;font-size:1rem;" id="pay-btn" onclick="initiateRazorpay()">
+        Pay with Razorpay →
+      </button>
+      <p style="text-align:center;font-size:0.75rem;color:var(--muted);margin-top:10px;">🔒 256-bit SSL encrypted · PCI DSS compliant</p>
+    </div>
+
+    <!-- QR Code Panel -->
+    <div class="pay-panel" id="panel-qr">
+      <!-- Step 1: Scan & Pay -->
+      <div id="qr-step-scan">
+        <div class="qr-section">
+          <div style="font-size:0.82rem;color:var(--muted);margin-bottom:10px;">
+            Scan with any UPI app — PhonePe, GPay, Paytm, BHIM & more
+          </div>
+          <div class="qr-amount-badge" id="qr-amount-display">₹0</div>
+          <div style="font-size:0.75rem;color:var(--muted);margin-bottom:12px;">Pay this exact amount</div>
+          <div class="qr-box">
+            <div id="qr-code-container" class="qr-loading">Generating QR...</div>
+          </div>
+          <div class="qr-upi-id">
+            <div>
+              <div style="font-size:0.72rem;color:var(--muted);margin-bottom:2px;">UPI ID</div>
+              <strong id="qr-upi-display">ammamagal@upi</strong>
+            </div>
+            <button class="copy-btn" onclick="copyUpiId()">📋 Copy</button>
+          </div>
+          <div class="qr-steps">
+            <div style="font-size:0.8rem;font-weight:700;color:var(--deep);margin-bottom:6px;">How to pay:</div>
+            <ol>
+              <li>Open <strong>PhonePe / GPay / Paytm / BHIM</strong> on your phone</li>
+              <li>Tap <strong>"Scan QR"</strong> or <strong>"Pay to UPI ID"</strong></li>
+              <li>Scan the QR code above or enter the UPI ID</li>
+              <li>Enter amount <strong id="qr-step-amount">₹0</strong> and complete payment</li>
+              <li>Enter your <strong>UPI Transaction ID</strong> below and confirm</li>
+            </ol>
+          </div>
+          <!-- Inline UTR field -->
+          <div style="margin-top:12px;">
+            <label style="display:block;font-size:0.8rem;font-weight:700;color:var(--text);margin-bottom:5px;text-align:left;">
+              UPI Transaction ID / UTR Number <span style="color:var(--rose);">*</span>
+            </label>
+            <input type="text" id="qr-utr-input" placeholder="e.g. 123456789012 or T2504191234XXXXXX"
+              style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:6px;font-size:0.9rem;color:var(--text);background:#fdf9f5;font-family:'Lato',sans-serif;transition:border-color 0.2s;"
+              onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'"/>
+            <div style="font-size:0.72rem;color:var(--muted);margin-top:4px;text-align:left;">
+              Find this in your UPI app under payment history / transaction details
+            </div>
+          </div>
+          <div id="qr-pay-alert" style="margin-top:10px;"></div>
+          <button class="qr-confirm-btn pulse-anim" onclick="confirmQrPayment()">
+            ✅ I've Paid — Confirm My Order
+          </button>
+          <p class="qr-note">
+            ⚠️ Please confirm only after completing payment. Your order will be verified within 1 hour.
+            For issues, call <strong>+91 98765 43210</strong>.
+          </p>
+        </div>
+      </div>
+
+      <!-- Step 2: Order Confirmation Screen (shown after payment confirmed) -->
+      <div id="qr-step-confirmed" style="display:none;">
+        <div style="text-align:center;padding:10px 0 20px;">
+          <div style="font-size:4rem;margin-bottom:10px;animation:bounceIn 0.5s ease;">🎉</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--deep);margin-bottom:6px;">
+            Order Confirmed!
+          </div>
+          <div style="color:var(--success);font-size:0.9rem;font-weight:700;margin-bottom:16px;">
+            ✅ Payment received — Thank you!
+          </div>
+          <div id="qr-confirm-details" style="background:#f0faf4;border:1.5px solid #b3d9c5;border-radius:10px;padding:18px;text-align:left;margin-bottom:18px;"></div>
+          <div style="background:#fff8e8;border:1px solid var(--gold);border-radius:8px;padding:12px 14px;font-size:0.82rem;color:var(--muted);text-align:left;margin-bottom:16px;">
+            📦 <strong style="color:var(--deep);">What happens next?</strong><br/>
+            Our team will verify your payment and dispatch your order within <strong>1–2 business days</strong>.
+            You'll receive a call at your registered number once shipped.
+          </div>
+          <button class="btn btn-gold" style="width:100%;padding:11px;" onclick="closePayModal();goPage('orders');">
+            View My Orders →
+          </button>
+          <button class="btn btn-outline" style="width:100%;padding:10px;margin-top:8px;" onclick="closePayModal();goPage('shop');">
+            Continue Shopping
+          </button>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -375,10 +537,17 @@
   <h3>🪷 Sri AmmaMagal Collections</h3>
   <p>📍 Chennai, Tamil Nadu &nbsp;|&nbsp; 📞 +91 98765 43210 &nbsp;|&nbsp; ✉️ info@sriammamagal.com</p>
   <p style="margin-top:8px;font-size:0.78rem;color:#7a5c48;">© 2026 Sri AmmaMagal Collections. All rights reserved.</p>
-  <p style="margin-top:6px;font-size:0.75rem;color:#5a3c28;">Payments powered by <strong style="color:var(--gold-light);">Razorpay</strong></p>
+  <p style="margin-top:6px;font-size:0.75rem;color:#5a3c28;">Payments powered by <strong style="color:var(--gold-light);">Razorpay</strong> & <strong style="color:var(--gold-light);">UPI</strong></p>
 </footer>
 
 <script>
+// ============================================================
+// CONFIG — update these with your real details
+// ============================================================
+const RAZORPAY_KEY = 'rzp_test_SfG88z9qmQS5Tj'; // Your Razorpay Key ID
+const UPI_ID       = 'kowshiekrajendran007@okaxis';             // ← REPLACE with your real UPI ID
+const UPI_NAME     = 'Sri AmmaMagal Collections'; // Merchant name shown in UPI apps
+
 // ============================================================
 // DATA STORE
 // ============================================================
@@ -393,25 +562,6 @@ const DB = {
   getCart:      () => JSON.parse(localStorage.getItem('smg_cart')    || '[]'),
   saveCart:     (c) => localStorage.setItem('smg_cart', JSON.stringify(c)),
 };
-
-// ============================================================
-//
-//   ██████╗  █████╗ ███████╗ ██████╗ ██████╗ ██████╗  █████╗ ██╗   ██╗
-//   ██╔══██╗██╔══██╗╚══███╔╝██╔═══██╗██╔══██╗██╔══██╗██╔══██╗╚██╗ ██╔╝
-//   ██████╔╝███████║  ███╔╝ ██║   ██║██████╔╝██████╔╝███████║ ╚████╔╝
-//   ██╔══██╗██╔══██║ ███╔╝  ██║   ██║██╔═══╝ ██╔═══╝ ██╔══██║  ╚██╔╝
-//   ██║  ██║██║  ██║███████╗╚██████╔╝██║     ██║     ██║  ██║   ██║
-//
-//   STEP 1 → Go to: https://dashboard.razorpay.com
-//   STEP 2 → Settings → API Keys → Generate Key
-//   STEP 3 → Copy your Key ID (starts with rzp_test_ or rzp_live_)
-//   STEP 4 → Replace the placeholder below with your actual Key ID
-//
-//   TEST  example:  rzp_test_AbCdEfGh12345678
-//   LIVE  example:  rzp_live_AbCdEfGh12345678
-//
-// ============================================================
-const RAZORPAY_KEY = 'rzp_test_YOUR_KEY_ID_HERE'; // <── PASTE YOUR KEY ID HERE
 
 // ============================================================
 // WOMEN'S PRODUCTS
@@ -435,7 +585,7 @@ const WOMEN_PRODUCTS = [
 // MEN'S PRODUCTS
 // ============================================================
 const MEN_PRODUCTS = [
-  { id:101, name:'Royal Sherwani Set',      category:'Sherwanis',  price:7999,  original:11000, desc:'Embroidered royal sherwani with churidar & dupatta',    emoji:'🤴', featured:true,  color:'#1a2a6b', gender:'men' },
+  { id:101, name:'Royal Sherwani Set',      category:'Sherwanis',  price:1,  original:11000, desc:'Embroidered royal sherwani with churidar & dupatta',    emoji:'🤴', featured:true,  color:'#1a2a6b', gender:'men' },
   { id:102, name:'Silk Kurta Pyjama',       category:'Kurta Sets', price:2499,  original:3200,  desc:'Pure silk festive kurta with matching pyjama',          emoji:'👔', featured:true,  color:'#2a1a6b', gender:'men' },
   { id:103, name:'Wedding Jodhpuri Blazer', category:'Blazers',    price:5499,  original:7000,  desc:'Classic Jodhpuri suit blazer with trouser',             emoji:'🎩', featured:true,  color:'#1a5a3a', gender:'men' },
   { id:104, name:'Cotton Kurta Set',        category:'Kurta Sets', price:899,   original:1200,  desc:'Breathable cotton kurta with straight-cut pyjama',      emoji:'🌿', featured:false, color:'#3a5a1a', gender:'men' },
@@ -564,7 +714,7 @@ function renderCart() {
     return;
   }
   const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
-  const delivery = subtotal > 2000 ? 0 : 99;
+  const delivery = subtotal > 2000 ? 0 : 0;
   const total    = subtotal + delivery;
   let rows = '';
   cart.forEach(i => {
@@ -588,7 +738,7 @@ function renderCart() {
     (delivery > 0 ? '<div style="font-size:0.75rem;color:var(--muted);margin-bottom:8px;">Free delivery on orders above &#x20B9;2,000</div>' : '') +
     '<div class="summary-row summary-total"><span>Total</span><span>&#x20B9;' + total.toLocaleString('en-IN') + '</span></div>' +
     '<button class="btn btn-gold" style="width:100%;margin-top:16px;padding:12px;" onclick="openPayment()">&#x1F512; Proceed to Secure Payment &rarr;</button>' +
-    '<p style="text-align:center;font-size:0.72rem;color:var(--muted);margin-top:8px;">Powered by Razorpay</p></div>';
+    '<p style="text-align:center;font-size:0.72rem;color:var(--muted);margin-top:8px;">Razorpay · UPI · Cards · Net Banking</p></div>';
 }
 function changeQty(id, delta) {
   let cart = DB.getCart();
@@ -628,13 +778,14 @@ function renderOrders() {
       '<span>&#x20B9;' + (i.price * i.qty).toLocaleString('en-IN') + '</span></div>'
     ).join('');
     const txn = o.razorpayId ? ' &middot; Txn: <strong>' + o.razorpayId + '</strong>' : '';
+    const utrNote = o.utrNote ? ' &middot; UTR/Ref: <strong>' + o.utrNote + '</strong>' : '';
     return '<div class="order-card">' +
       '<div class="order-header"><div><div class="order-id">Order #' + o.id + '</div>' +
       '<div class="order-date">' + o.date + '</div></div>' +
       '<span class="status-badge status-' + o.status.toLowerCase() + '">' + o.status + '</span></div>' +
       '<div class="order-items">' + itemsHTML +
       '<div style="font-size:0.8rem;color:var(--muted);margin-top:8px;">&#x1F4CD; ' + o.address + '</div>' +
-      '<div style="font-size:0.8rem;color:var(--muted);">&#x1F4B3; Payment: ' + o.paymentMethod + txn + '</div></div>' +
+      '<div style="font-size:0.8rem;color:var(--muted);">&#x1F4B3; Payment: ' + o.paymentMethod + txn + utrNote + '</div></div>' +
       '<div class="order-footer"><span>Total Paid</span><span>&#x20B9;' + o.total.toLocaleString('en-IN') + '</span></div></div>';
   }).join('');
 }
@@ -689,7 +840,6 @@ function doRegister() {
   const phone = document.getElementById('r-phone').value.trim();
   const pass  = document.getElementById('r-pass').value;
   const cpass = document.getElementById('r-cpass').value;
-  // FIX: renamed from `alert` to `regAlertEl` — `alert` shadowed the browser's global alert()
   const regAlertEl = document.getElementById('reg-alert');
   if (!fname || !email || !pass) { regAlertEl.innerHTML = '<div class="alert alert-error">&#x274C; Please fill all required fields.</div>'; return; }
   if (pass.length < 6)           { regAlertEl.innerHTML = '<div class="alert alert-error">&#x274C; Password must be at least 6 characters.</div>'; return; }
@@ -703,28 +853,32 @@ function doRegister() {
 function logout() {
   DB.clearSession(); DB.saveCart([]); updateCartCount();
   document.getElementById('auth-buttons').style.display = 'flex';
-  // FIX: use CSS class instead of inline style for reliable flex display
   document.getElementById('user-menu').classList.remove('visible');
   showToast('Logged out successfully.'); goPage('home');
 }
 function updateUserUI(user) {
   document.getElementById('auth-buttons').style.display = 'none';
-  // FIX: use CSS class .visible which correctly sets display:flex
   document.getElementById('user-menu').classList.add('visible');
   document.getElementById('user-greeting').textContent = 'Hello, ' + user.name.split(' ')[0] + '!';
 }
 
 // ============================================================
-// PAYMENT — RAZORPAY
+// PAYMENT — SHARED OPEN/CLOSE
 // ============================================================
+let _payContext = null; // stores { cart, total, subtotal, delivery }
+
 function openPayment() {
   const session = DB.getSession();
   if (!session) { openModal('login'); return; }
   const cart = DB.getCart();
   if (!cart.length) { showToast('Your cart is empty!'); return; }
+
   const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
-  const delivery = subtotal > 2000 ? 0 : 99;
+  const delivery = 0;
   const total    = subtotal + delivery;
+  _payContext    = { cart, total, subtotal, delivery };
+
+  // Populate order summary
   let summaryHTML = '';
   cart.forEach(i => {
     summaryHTML += '<div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:3px 0;">' +
@@ -733,15 +887,170 @@ function openPayment() {
   });
   summaryHTML += '<div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:3px 0;color:var(--muted);">' +
     '<span>Delivery</span><span>' + (delivery === 0 ? 'FREE' : '&#x20B9;' + delivery) + '</span></div>';
+
   document.getElementById('pay-order-summary').innerHTML = summaryHTML;
-  document.getElementById('pay-total').textContent = '₹' + total.toLocaleString('en-IN');
-  document.getElementById('pay-alert').innerHTML   = '';
-  document.getElementById('pay-name').value  = session.name  || '';
-  document.getElementById('pay-phone').value = session.phone || '';
+  document.getElementById('pay-total').textContent       = '₹' + total.toLocaleString('en-IN');
+  document.getElementById('pay-alert').innerHTML         = '';
+  document.getElementById('pay-name').value              = session.name  || '';
+  document.getElementById('pay-phone').value             = session.phone || '';
+  document.getElementById('pay-address').value           = '';
+
+  // Reset to Razorpay tab
+  switchPayTab('razorpay', document.querySelector('.pay-tab'));
+
   document.getElementById('payment-modal').classList.add('open');
 }
-function closePayModal() { document.getElementById('payment-modal').classList.remove('open'); }
 
+function closePayModal() {
+  document.getElementById('payment-modal').classList.remove('open');
+  // Reset QR confirmation view for next open
+  document.getElementById('qr-step-scan').style.display      = 'block';
+  document.getElementById('qr-step-confirmed').style.display = 'none';
+  document.getElementById('delivery-fields').style.display   = 'block';
+  document.querySelector('.pay-tabs').style.display           = 'flex';
+}
+
+// ============================================================
+// PAYMENT TABS
+// ============================================================
+function switchPayTab(tab, btn) {
+  document.querySelectorAll('.pay-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.pay-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('panel-' + tab).classList.add('active');
+
+  if (tab === 'qr') {
+    generateQrCode();
+  }
+}
+
+// ============================================================
+// QR CODE PAYMENT
+// ============================================================
+function buildUpiUrl(amount) {
+  // Standard UPI deep-link format (works with PhonePe, GPay, Paytm, BHIM)
+  return 'upi://pay?pa=' + encodeURIComponent(UPI_ID) +
+    '&pn=' + encodeURIComponent(UPI_NAME) +
+    '&am=' + amount.toFixed(2) +
+    '&cu=INR' +
+    '&tn=' + encodeURIComponent('Sri AmmaMagal Order');
+}
+
+let _qrInstance = null;
+
+function generateQrCode() {
+  if (!_payContext) return;
+  const total = _payContext.total;
+
+  // Update amount displays
+  document.getElementById('qr-amount-display').textContent = '₹' + total.toLocaleString('en-IN');
+  document.getElementById('qr-step-amount').textContent    = '₹' + total.toLocaleString('en-IN');
+  document.getElementById('qr-upi-display').textContent    = UPI_ID;
+  document.getElementById('qr-pay-alert').innerHTML        = '';
+
+  const container = document.getElementById('qr-code-container');
+  container.innerHTML = '';
+
+  try {
+    _qrInstance = new QRCode(container, {
+      text:          buildUpiUrl(total),
+      width:         200,
+      height:        200,
+      colorDark:     '#1a0a00',
+      colorLight:    '#ffffff',
+      correctLevel:  QRCode.CorrectLevel.H,
+    });
+  } catch(e) {
+    container.innerHTML = '<div style="padding:20px;color:var(--muted);font-size:0.82rem;">QR generation failed.<br>Please use UPI ID directly.</div>';
+  }
+}
+
+function copyUpiId() {
+  navigator.clipboard.writeText(UPI_ID).then(() => {
+    showToast('UPI ID copied: ' + UPI_ID);
+  }).catch(() => {
+    // Fallback for older browsers
+    const el = document.createElement('textarea');
+    el.value = UPI_ID;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    showToast('UPI ID copied!');
+  });
+}
+
+function confirmQrPayment() {
+  const session = DB.getSession();
+  const name    = document.getElementById('pay-name').value.trim();
+  const phone   = document.getElementById('pay-phone').value.trim();
+  const address = document.getElementById('pay-address').value.trim();
+  const utrNote = document.getElementById('qr-utr-input').value.trim();
+  const alertEl = document.getElementById('qr-pay-alert');
+
+  if (!name)    { alertEl.innerHTML = '<div class="alert alert-error">&#x274C; Please enter your name above.</div>';           return; }
+  if (!phone)   { alertEl.innerHTML = '<div class="alert alert-error">&#x274C; Please enter your phone number above.</div>';  return; }
+  if (!address) { alertEl.innerHTML = '<div class="alert alert-error">&#x274C; Please enter a delivery address above.</div>'; return; }
+  if (!utrNote) { alertEl.innerHTML = '<div class="alert alert-error">&#x274C; Please enter your UPI Transaction ID / UTR number.</div>'; return; }
+
+  const { cart, total } = _payContext;
+
+  const order = {
+    id:            'SMG' + Date.now(),
+    email:         session.email,
+    items:         [...cart],
+    total,
+    address,
+    paymentMethod: 'UPI QR Code',
+    utrNote:       utrNote,
+    razorpayId:    null,
+    status:        'Confirmed',
+    date:          new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }),
+  };
+
+  const orders = DB.getOrders();
+  orders.push(order);
+  DB.saveOrders(orders);
+  DB.saveCart([]);
+  updateCartCount();
+
+  // Build confirmation details card
+  const itemsList = cart.map(i =>
+    '<div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:3px 0;">' +
+    '<span>' + i.emoji + ' ' + i.name + ' ×' + i.qty + '</span>' +
+    '<span>₹' + (i.price * i.qty).toLocaleString('en-IN') + '</span></div>'
+  ).join('');
+
+  document.getElementById('qr-confirm-details').innerHTML =
+    '<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">' +
+      '<span style="font-size:1.4rem;">📦</span>' +
+      '<div><div style="font-weight:700;font-size:0.88rem;color:var(--deep);">Order #' + order.id + '</div>' +
+      '<div style="font-size:0.75rem;color:var(--muted);">' + order.date + '</div></div>' +
+      '<span class="status-badge status-confirmed" style="margin-left:auto;">Confirmed</span>' +
+    '</div>' +
+    '<div style="border-top:1px solid #b3d9c5;padding-top:10px;margin-bottom:10px;">' + itemsList + '</div>' +
+    '<div style="border-top:1px solid #b3d9c5;padding-top:8px;display:flex;justify-content:space-between;font-weight:700;font-size:0.95rem;color:var(--deep);">' +
+      '<span>Total Paid</span><span style="color:var(--rose);">₹' + total.toLocaleString('en-IN') + '</span>' +
+    '</div>' +
+    '<div style="margin-top:10px;font-size:0.8rem;color:var(--muted);">' +
+      '📱 UPI Txn ID: <strong style="color:var(--deep);">' + utrNote + '</strong><br/>' +
+      '📍 ' + address + '<br/>' +
+      '📞 ' + phone +
+    '</div>';
+
+  // Switch to confirmation screen
+  document.getElementById('qr-step-scan').style.display      = 'none';
+  document.getElementById('qr-step-confirmed').style.display = 'block';
+  // Hide delivery fields & tabs while confirmation is shown
+  document.getElementById('delivery-fields').style.display   = 'none';
+  document.querySelector('.pay-tabs').style.display           = 'none';
+
+  showToast('🎉 Order #' + order.id + ' confirmed!');
+}
+
+// ============================================================
+// PAYMENT — RAZORPAY
+// ============================================================
 function initiateRazorpay() {
   const session = DB.getSession();
   const name    = document.getElementById('pay-name').value.trim();
@@ -752,10 +1061,7 @@ function initiateRazorpay() {
   if (!phone)   { alertEl.innerHTML = '<div class="alert alert-error">&#x274C; Please enter your phone number.</div>';  return; }
   if (!address) { alertEl.innerHTML = '<div class="alert alert-error">&#x274C; Please enter a delivery address.</div>'; return; }
 
-  const cart     = DB.getCart();
-  const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
-  const delivery = subtotal > 2000 ? 0 : 99;
-  const total    = subtotal + delivery;
+  const { cart, total } = _payContext;
 
   const btn = document.getElementById('pay-btn');
   btn.innerHTML = '<span class="spinner"></span> Opening Razorpay...';
@@ -763,21 +1069,19 @@ function initiateRazorpay() {
 
   const options = {
     key:         RAZORPAY_KEY,
-    amount:      total * 100,         // Razorpay requires paise (₹1 = 100 paise)
+    amount:      total * 100,
     currency:    'INR',
     name:        'Sri AmmaMagal Collections',
     description: 'Order — ' + cart.length + ' item(s)',
-    image:       '',                  // Optional: your shop logo URL
-    // order_id: 'order_XXXX',        // Strongly recommended for production (generate on backend)
+    image:       '',
     prefill: {
       name:    name,
       email:   session.email,
       contact: phone.replace(/\D/g, '').slice(-10),
     },
     notes: {
-      address:      address,
+      address,
       customer:     session.email,
-      // FIX: name & phone saved in notes so onPaymentSuccess receives the full context
       customerName: name,
       order_items:  cart.map(i => i.name + 'x' + i.qty).join(', '),
     },
@@ -790,8 +1094,7 @@ function initiateRazorpay() {
       }
     },
     handler: function(response) {
-      // FIX: all needed context passed explicitly to avoid undefined variables
-      onPaymentSuccess(response, { cart, total, address, session, name, phone });
+      onRazorpaySuccess(response, { cart, total, address, session, name, phone });
     },
   };
 
@@ -811,8 +1114,7 @@ function initiateRazorpay() {
   }
 }
 
-function onPaymentSuccess(razorpayResponse, { cart, total, address, session, name, phone }) {
-  // Production tip: POST razorpay_payment_id + razorpay_signature to your backend to verify before confirming order
+function onRazorpaySuccess(razorpayResponse, { cart, total, address, session, name, phone }) {
   const order = {
     id:            'SMG' + Date.now(),
     email:         session.email,
@@ -821,10 +1123,10 @@ function onPaymentSuccess(razorpayResponse, { cart, total, address, session, nam
     address,
     paymentMethod: 'Razorpay',
     razorpayId:    razorpayResponse.razorpay_payment_id,
+    utrNote:       null,
     status:        'Confirmed',
     date:          new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }),
   };
-  DB.getOrders().concat([]);
   const orders = DB.getOrders();
   orders.push(order);
   DB.saveOrders(orders);
