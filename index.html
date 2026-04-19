@@ -1,180 +1,880 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sri AmmaMagal Collection</title>
-
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sri AmmaMagal Collections</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:wght@300;400;500;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
 <style>
-body{margin:0;font-family:'Segoe UI',sans-serif;background:#f5f5f5}
-header{background:#8B0000;color:white;padding:15px 30px;display:flex;justify-content:space-between;align-items:center}
-.logo{display:flex;align-items:center}
-nav{background:#222;padding:12px;text-align:center}
-nav a{color:white;margin:0 15px;text-decoration:none}
-.section{display:none;padding:30px}
-.active{display:block}
-.products{display:flex;flex-wrap:wrap;justify-content:center}
-.card{background:white;width:250px;margin:15px;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,.1)}
-.card img{width:100%;height:250px;object-fit:cover}
-.card-content{text-align:center;padding:10px}
-.price{color:green;font-weight:bold}
-button{padding:8px;margin:5px;border:none;border-radius:5px;cursor:pointer}
-.cart-btn{background:#ff9800;color:white}
-.order-btn{background:#25D366;color:white}
-#profile{background:white;padding:20px;margin:20px;border-radius:10px}
+  :root {
+    --gold: #c9922a;
+    --gold-light: #e8c07a;
+    --deep: #1a0a00;
+    --cream: #fdf6ec;
+    --rose: #a0404a;
+    --rose-light: #f7dce0;
+    --text: #2e1a0e;
+    --muted: #7a5c48;
+    --white: #ffffff;
+    --border: #e8d5b7;
+    --success: #2d7a4f;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Lato', sans-serif; background: var(--cream); color: var(--text); min-height: 100vh; }
+
+  /* ===== HEADER ===== */
+  header {
+    background: linear-gradient(135deg, var(--deep) 0%, #3a1505 60%, #5a2010 100%);
+    color: var(--cream);
+    text-align: center;
+    padding: 18px 20px 14px;
+    position: sticky; top: 0; z-index: 200;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    border-bottom: 2px solid var(--gold);
+  }
+  .header-top { display: flex; align-items: center; justify-content: space-between; max-width: 1100px; margin: 0 auto; }
+  .logo-area h1 { font-family: 'Playfair Display', serif; font-size: 1.9rem; letter-spacing: 2px; color: var(--gold-light); }
+  .logo-area p { font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; color: #d4b896; letter-spacing: 3px; text-transform: uppercase; }
+  .header-actions { display: flex; gap: 10px; align-items: center; }
+  .btn { padding: 8px 18px; border-radius: 4px; border: none; cursor: pointer; font-family: 'Lato', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s; }
+  .btn-outline { background: transparent; border: 1.5px solid var(--gold); color: var(--gold-light); }
+  .btn-outline:hover { background: var(--gold); color: var(--deep); }
+  .btn-gold { background: var(--gold); color: var(--deep); }
+  .btn-gold:hover { background: var(--gold-light); }
+  .btn-rose { background: var(--rose); color: #fff; }
+  .btn-rose:hover { background: #c0505a; }
+  .btn-sm { padding: 6px 13px; font-size: 0.78rem; }
+  .cart-btn { position: relative; }
+  .cart-count { position: absolute; top: -6px; right: -6px; background: var(--rose); color: #fff; border-radius: 50%; width: 18px; height: 18px; font-size: 0.65rem; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+  nav { margin-top: 10px; display: flex; justify-content: center; gap: 28px; max-width: 1100px; margin: 10px auto 0; }
+  nav a { color: #d4b896; font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 500; letter-spacing: 1.5px; text-decoration: none; text-transform: uppercase; transition: color 0.2s; cursor: pointer; }
+  nav a:hover, nav a.active { color: var(--gold-light); border-bottom: 1px solid var(--gold); }
+
+  /* ===== HERO ===== */
+  #page-home .hero {
+    background: linear-gradient(160deg, #2e0d05 0%, #5a1a10 40%, #8b3a20 100%);
+    color: var(--cream); text-align: center; padding: 80px 20px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content:''; position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9922a' fill-opacity='0.07'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.4;
+  }
+  .hero h2 { font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--gold-light); position: relative; }
+  .hero p { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: #e0c9b0; margin: 14px 0 30px; position: relative; }
+  .hero .btn { position: relative; padding: 12px 32px; font-size: 0.95rem; }
+  .tag-row { display: flex; justify-content: center; gap: 14px; margin-top: 22px; flex-wrap: wrap; position: relative; }
+  .tag { background: rgba(201,146,42,0.18); border: 1px solid var(--gold); color: var(--gold-light); padding: 5px 16px; border-radius: 20px; font-size: 0.8rem; font-family: 'Cormorant Garamond', serif; letter-spacing: 1px; }
+
+  /* ===== SECTIONS ===== */
+  .section { max-width: 1100px; margin: 0 auto; padding: 50px 20px; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--deep); text-align: center; margin-bottom: 8px; }
+  .section-sub { text-align: center; color: var(--muted); font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; margin-bottom: 36px; }
+  .divider { width: 60px; height: 3px; background: var(--gold); margin: 10px auto 30px; border-radius: 2px; }
+
+  /* ===== PRODUCT GRID ===== */
+  .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 26px; }
+  .product-card {
+    background: var(--white); border-radius: 10px; overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08); border: 1px solid var(--border);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.13); }
+  .product-img { width: 100%; height: 230px; object-fit: cover; display: block; background: #f0e8df; }
+  .product-img-placeholder {
+    width: 100%; height: 230px; background: linear-gradient(135deg, #f0e8df, #ecdcc8);
+    display: flex; align-items: center; justify-content: center; font-size: 3rem;
+  }
+  .product-info { padding: 14px 16px 18px; }
+  .product-name { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--deep); margin-bottom: 4px; }
+  .product-desc { font-size: 0.82rem; color: var(--muted); margin-bottom: 10px; line-height: 1.5; }
+  .product-price { font-size: 1.1rem; font-weight: 700; color: var(--rose); margin-bottom: 10px; }
+  .product-old-price { text-decoration: line-through; color: #aaa; font-size: 0.85rem; margin-left: 6px; font-weight: 400; }
+  .product-actions { display: flex; gap: 8px; }
+
+  /* ===== FILTER BAR ===== */
+  .filter-bar { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 30px; }
+  .filter-btn { padding: 7px 18px; border-radius: 20px; border: 1.5px solid var(--gold); background: transparent; color: var(--gold); font-size: 0.82rem; cursor: pointer; transition: all 0.2s; font-family: 'Cormorant Garamond', serif; font-weight: 600; letter-spacing: 1px; }
+  .filter-btn.active, .filter-btn:hover { background: var(--gold); color: var(--deep); }
+
+  /* ===== PAGES ===== */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ===== AUTH MODAL ===== */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55);
+    z-index: 999; align-items: center; justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--white); border-radius: 12px; padding: 36px 32px; width: 100%; max-width: 430px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3); position: relative;
+    border-top: 4px solid var(--gold);
+  }
+  .modal h2 { font-family: 'Playfair Display', serif; color: var(--deep); font-size: 1.6rem; margin-bottom: 6px; }
+  .modal p.sub { color: var(--muted); font-size: 0.88rem; margin-bottom: 24px; }
+  .modal-close { position: absolute; top: 14px; right: 18px; font-size: 1.4rem; cursor: pointer; color: var(--muted); background: none; border: none; }
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-size: 0.82rem; font-weight: 700; color: var(--text); margin-bottom: 5px; letter-spacing: 0.5px; }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 6px;
+    font-size: 0.92rem; color: var(--text); background: #fdf9f5;
+    transition: border-color 0.2s; font-family: 'Lato', sans-serif;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--gold); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .auth-toggle { text-align: center; margin-top: 16px; font-size: 0.85rem; color: var(--muted); }
+  .auth-toggle span { color: var(--gold); cursor: pointer; font-weight: 700; }
+  .alert { padding: 10px 14px; border-radius: 6px; font-size: 0.85rem; margin-bottom: 14px; }
+  .alert-error { background: #fde8e8; color: #8b1a1a; border: 1px solid #f5c6c6; }
+  .alert-success { background: #e8f5ee; color: #1a5c38; border: 1px solid #b3d9c5; }
+
+  /* ===== CART ===== */
+  .cart-table { width: 100%; border-collapse: collapse; }
+  .cart-table th { background: var(--deep); color: var(--gold-light); font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; padding: 10px 14px; text-align: left; letter-spacing: 1px; }
+  .cart-table td { padding: 12px 14px; border-bottom: 1px solid var(--border); font-size: 0.88rem; vertical-align: middle; }
+  .cart-table tr:last-child td { border-bottom: none; }
+  .cart-total-row { background: #fdf6ec; font-weight: 700; }
+  .qty-ctrl { display: flex; align-items: center; gap: 8px; }
+  .qty-btn { width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid var(--gold); background: transparent; color: var(--gold); font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .qty-btn:hover { background: var(--gold); color: var(--deep); }
+  .remove-btn { color: var(--rose); cursor: pointer; border: none; background: none; font-size: 1.1rem; }
+  .cart-summary { background: var(--white); border-radius: 10px; padding: 24px; border: 1px solid var(--border); max-width: 380px; margin-left: auto; margin-top: 24px; }
+  .cart-summary h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 16px; }
+  .summary-row { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 10px; color: var(--muted); }
+  .summary-total { font-weight: 700; font-size: 1.05rem; color: var(--deep); border-top: 1px solid var(--border); padding-top: 10px; margin-top: 4px; }
+  .empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
+  .empty-state .icon { font-size: 3.5rem; margin-bottom: 14px; }
+
+  /* ===== ORDERS ===== */
+  .order-card { background: var(--white); border-radius: 10px; border: 1px solid var(--border); margin-bottom: 18px; overflow: hidden; }
+  .order-header { background: #f9f1e6; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
+  .order-id { font-weight: 700; font-size: 0.9rem; color: var(--deep); }
+  .order-date { color: var(--muted); font-size: 0.82rem; }
+  .status-badge { padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.5px; }
+  .status-pending { background: #fff3cd; color: #7a5500; }
+  .status-confirmed { background: #d4edda; color: #155724; }
+  .status-shipped { background: #cce5ff; color: #004085; }
+  .order-items { padding: 16px 20px; }
+  .order-item { display: flex; justify-content: space-between; font-size: 0.87rem; padding: 4px 0; color: var(--text); }
+  .order-footer { padding: 12px 20px; background: #fdf6ec; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-size: 0.88rem; font-weight: 700; color: var(--deep); }
+
+  /* ===== PAYMENT MODAL ===== */
+  .payment-methods { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
+  .pay-method { flex: 1; min-width: 100px; border: 2px solid var(--border); border-radius: 8px; padding: 12px 8px; text-align: center; cursor: pointer; transition: all 0.2s; font-size: 0.82rem; color: var(--muted); font-weight: 700; }
+  .pay-method:hover, .pay-method.selected { border-color: var(--gold); background: #fdf6ec; color: var(--deep); }
+  .pay-method .pm-icon { font-size: 1.6rem; display: block; margin-bottom: 5px; }
+  .card-details { display: none; }
+  .card-details.show { display: block; }
+
+  /* ===== PROFILE ===== */
+  .profile-card { background: var(--white); border-radius: 12px; border: 1px solid var(--border); padding: 30px; max-width: 500px; margin: 0 auto 30px; text-align: center; }
+  .profile-avatar { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--rose)); display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #fff; margin: 0 auto 16px; }
+  .profile-name { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--deep); }
+  .profile-email { color: var(--muted); font-size: 0.9rem; margin-top: 4px; }
+
+  /* ===== FOOTER ===== */
+  footer { background: var(--deep); color: #c4a882; text-align: center; padding: 28px 20px; margin-top: 60px; border-top: 2px solid var(--gold); }
+  footer h3 { font-family: 'Playfair Display', serif; color: var(--gold-light); font-size: 1.3rem; margin-bottom: 8px; }
+  footer p { font-size: 0.83rem; line-height: 1.8; }
+
+  /* ===== TOAST ===== */
+  .toast { position: fixed; bottom: 28px; right: 28px; background: var(--deep); color: var(--gold-light); padding: 13px 22px; border-radius: 8px; font-size: 0.88rem; z-index: 9999; display: none; border-left: 4px solid var(--gold); box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+  .toast.show { display: block; animation: slideIn 0.3s ease; }
+  @keyframes slideIn { from { transform: translateX(60px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+  /* ===== RESPONSIVE ===== */
+  @media(max-width:640px) {
+    .logo-area h1 { font-size: 1.3rem; }
+    .hero h2 { font-size: 2rem; }
+    .header-actions .btn span { display: none; }
+    .product-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+    .product-img, .product-img-placeholder { height: 170px; }
+    nav { gap: 14px; }
+    nav a { font-size: 0.85rem; }
+  }
 </style>
 </head>
 <body>
 
+<!-- HEADER -->
 <header>
-<div class="logo"><h2>Sri AmmaMagal</h2></div>
-<div>
-<button onclick="showLogin()">Login / Signup</button>
-<button onclick="logout()">Logout</button>
+  <div class="logo-area">
+  <img src="logo.jpg" alt="Sri AmmaMagal Logo" style="height:100px;">
+  <h1>Sri AmmaMagal Collections</h1>
+  <h3>Elegance Woven with Tradition</h3>
 </div>
+    <div class="header-actions">
+      <button class="btn btn-outline btn-sm cart-btn" onclick="goPage('cart')">
+        🛒 <span>Cart</span>
+        <span class="cart-count" id="cart-count">0</span>
+      </button>
+      <div id="auth-buttons">
+        <button class="btn btn-outline btn-sm" onclick="openModal('login')">Login</button>
+        <button class="btn btn-gold btn-sm" onclick="openModal('register')">Register</button>
+      </div>
+      <div id="user-menu" style="display:none;">
+        <span id="user-greeting" style="color:var(--gold-light);font-size:0.85rem;margin-right:8px;font-family:'Cormorant Garamond',serif;"></span>
+        <button class="btn btn-outline btn-sm" onclick="goPage('profile')">Profile</button>
+        <button class="btn btn-rose btn-sm" onclick="logout()">Logout</button>
+      </div>
+    </div>
+  </div>
+  <nav>
+    <a onclick="goPage('home')" id="nav-home" class="active">Home</a>
+    <a onclick="goPage('shop')" id="nav-shop">Shop</a>
+    <a onclick="goPage('cart')" id="nav-cart">Cart</a>
+    <a onclick="goPage('orders')" id="nav-orders">My Orders</a>
+    <a onclick="goPage('profile')" id="nav-profile">Profile</a>
+  </nav>
 </header>
 
-<nav>
-<a href="#" onclick="showSection('home')">Home</a>
-<a href="#" onclick="showSection('shop')">Shop</a>
-<a href="#" onclick="showSection('profile')">Profile</a>
-</nav>
+<!-- PAGES -->
 
-<div id="home" class="section active"><h2>Welcome</h2></div>
+<!-- HOME -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <h2>Discover Timeless Elegance</h2>
+    <p>Exquisite sarees, kurtis, lehengas & more — crafted for the modern Indian woman</p>
+    <button class="btn btn-gold" onclick="goPage('shop')">Shop the Collection →</button>
+    <div class="tag-row">
+      <span class="tag">✦ Silk Sarees</span>
+      <span class="tag">✦ Designer Kurtis</span>
+      <span class="tag">✦ Bridal Lehengas</span>
+      <span class="tag">✦ Ethnic Sets</span>
+      <span class="tag">✦ Party Wear</span>
+    </div>
+  </div>
 
-<div id="shop" class="section">
-<h2>Products</h2>
-<div class="products" id="productList"></div>
+  <div class="section">
+    <h2 class="section-title">Featured Collections</h2>
+    <p class="section-sub">Handpicked pieces loved by our customers</p>
+    <div class="divider"></div>
+    <div class="product-grid" id="featured-grid"></div>
+  </div>
 </div>
 
-<div id="profile" class="section">
-<h2>Your Profile</h2>
-<p id="userInfo"></p>
-<h3>Your Orders</h3>
-<div id="orderHistory"></div>
+<!-- SHOP -->
+<div id="page-shop" class="page">
+  <div class="section">
+    <h2 class="section-title">All Collections</h2>
+    <p class="section-sub">Find your perfect dress from our exclusive range</p>
+    <div class="divider"></div>
+    <div class="filter-bar" id="filter-bar"></div>
+    <div class="product-grid" id="shop-grid"></div>
+  </div>
 </div>
 
-<!-- LOGIN + SIGNUP PAGE -->
-<div id="loginPage" class="section">
-<h2>Login / Signup</h2>
-<input type="email" id="email" placeholder="Email"><br>
-<input type="password" id="password" placeholder="Password"><br>
-<button onclick="login()">Login</button>
-<button onclick="signup()">Signup</button>
+<!-- CART -->
+<div id="page-cart" class="page">
+  <div class="section">
+    <h2 class="section-title">Your Cart</h2>
+    <div class="divider"></div>
+    <div id="cart-content"></div>
+  </div>
 </div>
+
+<!-- ORDERS -->
+<div id="page-orders" class="page">
+  <div class="section">
+    <h2 class="section-title">My Orders</h2>
+    <p class="section-sub">Track all your placed orders</p>
+    <div class="divider"></div>
+    <div id="orders-content"></div>
+  </div>
+</div>
+
+<!-- PROFILE -->
+<div id="page-profile" class="page">
+  <div class="section">
+    <h2 class="section-title">My Profile</h2>
+    <div class="divider"></div>
+    <div id="profile-content"></div>
+  </div>
+</div>
+
+<!-- AUTH MODAL -->
+<div class="modal-overlay" id="auth-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <!-- LOGIN FORM -->
+    <div id="login-form">
+      <h2>Welcome Back 🪷</h2>
+      <p class="sub">Sign in to access your orders and cart</p>
+      <div id="login-alert"></div>
+      <div class="form-group"><label>Email Address</label><input type="email" id="l-email" placeholder="you@example.com"/></div>
+      <div class="form-group"><label>Password</label><input type="password" id="l-pass" placeholder="••••••••"/></div>
+      <button class="btn btn-gold" style="width:100%;padding:11px;" onclick="doLogin()">Login to Account</button>
+      <div class="auth-toggle">Don't have an account? <span onclick="switchAuth('register')">Register here</span></div>
+    </div>
+    <!-- REGISTER FORM -->
+    <div id="register-form" style="display:none;">
+      <h2>Create Account</h2>
+      <p class="sub">Join Sri AmmaMagal Collections today</p>
+      <div id="reg-alert"></div>
+      <div class="form-row">
+        <div class="form-group"><label>First Name</label><input type="text" id="r-fname" placeholder="Priya"/></div>
+        <div class="form-group"><label>Last Name</label><input type="text" id="r-lname" placeholder="Devi"/></div>
+      </div>
+      <div class="form-group"><label>Email Address</label><input type="email" id="r-email" placeholder="you@example.com"/></div>
+      <div class="form-group"><label>Phone Number</label><input type="tel" id="r-phone" placeholder="+91 98765 43210"/></div>
+      <div class="form-group"><label>Password</label><input type="password" id="r-pass" placeholder="Min 6 characters"/></div>
+      <div class="form-group"><label>Confirm Password</label><input type="password" id="r-cpass" placeholder="Repeat password"/></div>
+      <button class="btn btn-gold" style="width:100%;padding:11px;" onclick="doRegister()">Create Account</button>
+      <div class="auth-toggle">Already have an account? <span onclick="switchAuth('login')">Login here</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- PAYMENT MODAL -->
+<div class="modal-overlay" id="payment-modal">
+  <div class="modal" style="max-width:520px;">
+    <button class="modal-close" onclick="closePayModal()">✕</button>
+    <h2>Complete Payment 💳</h2>
+    <p class="sub">Secure checkout for your order</p>
+    <div id="pay-alert"></div>
+
+    <!-- Order Summary -->
+    <div style="background:#fdf6ec;border-radius:8px;padding:14px;margin-bottom:18px;border:1px solid var(--border);">
+      <div style="font-weight:700;font-size:0.9rem;margin-bottom:8px;color:var(--deep);">Order Summary</div>
+      <div id="pay-order-summary"></div>
+      <div style="border-top:1px solid var(--border);margin-top:8px;padding-top:8px;font-weight:700;display:flex;justify-content:space-between;">
+        <span>Total Amount</span><span id="pay-total" style="color:var(--rose);"></span>
+      </div>
+    </div>
+
+    <!-- Delivery Address -->
+    <div class="form-group">
+      <label>Delivery Address</label>
+      <textarea id="pay-address" rows="2" placeholder="Enter your full delivery address..."></textarea>
+    </div>
+
+    <!-- Payment Method -->
+    <label style="font-size:0.82rem;font-weight:700;color:var(--text);display:block;margin-bottom:10px;">SELECT PAYMENT METHOD</label>
+    <div class="payment-methods">
+      <div class="pay-method selected" onclick="selectPayMethod('upi',this)">
+        <span class="pm-icon">📱</span>UPI
+      </div>
+      <div class="pay-method" onclick="selectPayMethod('card',this)">
+        <span class="pm-icon">💳</span>Card
+      </div>
+      <div class="pay-method" onclick="selectPayMethod('netbanking',this)">
+        <span class="pm-icon">🏦</span>Net Banking
+      </div>
+      <div class="pay-method" onclick="selectPayMethod('cod',this)">
+        <span class="pm-icon">💵</span>Cash on Delivery
+      </div>
+    </div>
+
+    <!-- UPI -->
+    <div id="upi-section">
+      <div class="form-group"><label>UPI ID</label><input type="text" id="pay-upi" placeholder="yourname@upi"/></div>
+    </div>
+
+    <!-- Card -->
+    <div id="card-section" class="card-details">
+      <div class="form-group"><label>Card Number</label><input type="text" id="pay-cardno" placeholder="1234 5678 9012 3456" maxlength="19"/></div>
+      <div class="form-row">
+        <div class="form-group"><label>Expiry</label><input type="text" id="pay-exp" placeholder="MM/YY" maxlength="5"/></div>
+        <div class="form-group"><label>CVV</label><input type="password" id="pay-cvv" placeholder="•••" maxlength="3"/></div>
+      </div>
+      <div class="form-group"><label>Name on Card</label><input type="text" id="pay-cname" placeholder="PRIYA DEVI"/></div>
+    </div>
+
+    <!-- Net Banking -->
+    <div id="nb-section" class="card-details">
+      <div class="form-group">
+        <label>Select Bank</label>
+        <select id="pay-bank">
+          <option value="">-- Choose Bank --</option>
+          <option>State Bank of India</option>
+          <option>HDFC Bank</option>
+          <option>ICICI Bank</option>
+          <option>Axis Bank</option>
+          <option>Kotak Mahindra Bank</option>
+          <option>Punjab National Bank</option>
+          <option>Bank of Baroda</option>
+          <option>Canara Bank</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- COD note -->
+    <div id="cod-section" class="card-details">
+      <div class="alert alert-success">✅ Cash on Delivery selected. Pay when your order arrives at your doorstep.</div>
+    </div>
+
+    <button class="btn btn-gold" style="width:100%;padding:12px;font-size:1rem;" onclick="processPayment()">Place Order & Pay →</button>
+    <p style="text-align:center;font-size:0.75rem;color:var(--muted);margin-top:10px;">🔒 Your payment information is secure & encrypted</p>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- FOOTER -->
+<footer>
+  <h3>🪷 Sri AmmaMagal Collections</h3>
+  <p>📍 Chennai, Tamil Nadu &nbsp;|&nbsp; 📞 +91 98765 43210 &nbsp;|&nbsp; ✉️ info@sriammamagal.com</p>
+  <p style="margin-top:10px;font-size:0.78rem;color:#7a5c48;">© 2026 Sri AmmaMagal Collections. All rights reserved.</p>
+</footer>
 
 <script>
-
-// Firebase config
-const firebaseConfig={
-apiKey:"YOUR_API_KEY",
-authDomain:"YOUR_DOMAIN",
-projectId:"YOUR_PROJECT_ID"
+// ============================================================
+// DATA STORE (localStorage as persistent DB)
+// ============================================================
+const DB = {
+  getUsers: () => JSON.parse(localStorage.getItem('smg_users') || '[]'),
+  saveUsers: (u) => localStorage.setItem('smg_users', JSON.stringify(u)),
+  getOrders: () => JSON.parse(localStorage.getItem('smg_orders') || '[]'),
+  saveOrders: (o) => localStorage.setItem('smg_orders', JSON.stringify(o)),
+  getSession: () => JSON.parse(localStorage.getItem('smg_session') || 'null'),
+  setSession: (u) => localStorage.setItem('smg_session', JSON.stringify(u)),
+  clearSession: () => localStorage.removeItem('smg_session'),
+  getCart: () => JSON.parse(localStorage.getItem('smg_cart') || '[]'),
+  saveCart: (c) => localStorage.setItem('smg_cart', JSON.stringify(c)),
 };
-firebase.initializeApp(firebaseConfig);
-const auth=firebase.auth();
-const db=firebase.firestore();
 
-let currentUser=null;
-
-// Products
-const products=[
-{id:1,name:'Saree',price:1500,img:'https://images.unsplash.com/photo-1610030469983-98e550d6193c'},
-{id:2,name:'T-Shirt',price:800,img:'https://images.unsplash.com/photo-1525507119028-ed4c629a60a3'}
+// ============================================================
+// PRODUCTS
+// ============================================================
+const PRODUCTS = [
+  { id:1, name:'Kanjivaram Silk Saree', category:'Sarees', price:3499, original:4500, desc:'Pure Kanjivaram silk with golden zari border', emoji:'🥻', featured:true, color:'#8b1a4a' },
+  { id:2, name:'Anarkali Kurti Set', category:'Kurtis', price:1299, original:1800, desc:'Flared Anarkali with palazzo pants', emoji:'👗', featured:true, color:'#1a4a8b' },
+  { id:3, name:'Bridal Lehenga', category:'Lehengas', price:8999, original:12000, desc:'Heavy embroidered bridal lehenga with dupatta', emoji:'💍', featured:true, color:'#8b3a1a' },
+  { id:4, name:'Chiffon Saree', category:'Sarees', price:1599, original:2200, desc:'Light chiffon saree with printed border', emoji:'🌸', featured:false, color:'#4a8b1a' },
+  { id:5, name:'Cotton Kurti', category:'Kurtis', price:649, original:900, desc:'Comfortable block-print cotton kurti', emoji:'🌿', featured:true, color:'#1a6b3a' },
+  { id:6, name:'Party Lehenga', category:'Lehengas', price:4299, original:5500, desc:'Sequined party lehenga with blouse', emoji:'✨', featured:false, color:'#6b1a8b' },
+  { id:7, name:'Ethnic Salwar Set', category:'Suits', price:1199, original:1600, desc:'Straight cut salwar kameez with dupatta', emoji:'👘', featured:false, color:'#8b6a1a' },
+  { id:8, name:'Georgette Saree', category:'Sarees', price:2199, original:2800, desc:'Printed georgette with embroidered blouse', emoji:'🌺', featured:true, color:'#1a3a8b' },
+  { id:9, name:'Banarasi Silk Saree', category:'Sarees', price:5499, original:7000, desc:'Authentic Banarasi weave with floral motifs', emoji:'🪷', featured:false, color:'#6b1a2a' },
+  { id:10, name:'Designer Kurti', category:'Kurtis', price:999, original:1400, desc:'Mirror work designer kurti with leggings', emoji:'💫', featured:false, color:'#8b1a6b' },
+  { id:11, name:'Indo-Western Gown', category:'Gowns', price:3199, original:4200, desc:'Elegant floor-length Indo-Western fusion gown', emoji:'🌙', featured:true, color:'#1a5a6b' },
+  { id:12, name:'Pattu Pavadai Set', category:'Kids', price:1499, original:1900, desc:'Traditional silk pavadai for girls (5–12 yrs)', emoji:'🎀', featured:false, color:'#8b4a1a' },
 ];
 
-function displayProducts(){
-let html='';
-products.forEach(p=>{
-html+=`<div class='card'>
-<img src='${p.img}'>
-<div class='card-content'>
-<h3>${p.name}</h3>
-<p class='price'>₹${p.price}</p>
-<button class='cart-btn' onclick='addToCart(${p.id})'>Add to Cart</button>
-<button class='order-btn' onclick='order(${p.id})'>Order</button>
-</div></div>`;
+const CATEGORIES = ['All', ...new Set(PRODUCTS.map(p => p.category))];
+
+let selectedPayMethod = 'upi';
+
+// ============================================================
+// INIT
+// ============================================================
+window.onload = () => {
+  renderFeatured();
+  renderShop('All');
+  renderFilterBar();
+  updateCartCount();
+  const session = DB.getSession();
+  if (session) updateUserUI(session);
+};
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function goPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  const navEl = document.getElementById('nav-' + name);
+  if (navEl) navEl.classList.add('active');
+
+  if (name === 'cart') renderCart();
+  if (name === 'orders') renderOrders();
+  if (name === 'profile') renderProfile();
+  window.scrollTo(0, 0);
+}
+
+// ============================================================
+// PRODUCTS RENDER
+// ============================================================
+function productCardHTML(p) {
+  return `
+    <div class="product-card">
+      <div class="product-img-placeholder" style="background:linear-gradient(135deg,${p.color}22,${p.color}44);">
+        <span style="font-size:3.5rem;">${p.emoji}</span>
+      </div>
+      <div class="product-info">
+        <div class="product-name">${p.name}</div>
+        <div class="product-desc">${p.desc}</div>
+        <div class="product-price">
+          ₹${p.price.toLocaleString('en-IN')}
+          <span class="product-old-price">₹${p.original.toLocaleString('en-IN')}</span>
+        </div>
+        <div class="product-actions">
+          <button class="btn btn-gold btn-sm" style="flex:1;" onclick="addToCart(${p.id})">🛒 Add to Cart</button>
+          <button class="btn btn-rose btn-sm" onclick="buyNow(${p.id})">Buy Now</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderFeatured() {
+  const featured = PRODUCTS.filter(p => p.featured);
+  document.getElementById('featured-grid').innerHTML = featured.map(productCardHTML).join('');
+}
+
+function renderShop(cat) {
+  const filtered = cat === 'All' ? PRODUCTS : PRODUCTS.filter(p => p.category === cat);
+  document.getElementById('shop-grid').innerHTML = filtered.map(productCardHTML).join('');
+}
+
+function renderFilterBar() {
+  const bar = document.getElementById('filter-bar');
+  bar.innerHTML = CATEGORIES.map(c =>
+    `<button class="filter-btn ${c==='All'?'active':''}" onclick="filterCat('${c}',this)">${c}</button>`
+  ).join('');
+}
+
+function filterCat(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderShop(cat);
+}
+
+// ============================================================
+// CART
+// ============================================================
+function addToCart(productId) {
+  const session = DB.getSession();
+  if (!session) { showToast('Please login to add items to cart!'); openModal('login'); return; }
+  let cart = DB.getCart();
+  const existing = cart.find(i => i.id === productId);
+  if (existing) existing.qty++;
+  else {
+    const p = PRODUCTS.find(p => p.id === productId);
+    cart.push({ id: p.id, name: p.name, price: p.price, emoji: p.emoji, qty: 1 });
+  }
+  DB.saveCart(cart);
+  updateCartCount();
+  showToast(`✅ ${PRODUCTS.find(p=>p.id===productId).name} added to cart!`);
+}
+
+function buyNow(productId) {
+  addToCart(productId);
+  goPage('cart');
+}
+
+function updateCartCount() {
+  const cart = DB.getCart();
+  const total = cart.reduce((s, i) => s + i.qty, 0);
+  document.getElementById('cart-count').textContent = total;
+}
+
+function renderCart() {
+  const cart = DB.getCart();
+  const el = document.getElementById('cart-content');
+  if (!cart.length) {
+    el.innerHTML = `<div class="empty-state"><div class="icon">🛒</div><p>Your cart is empty!</p><button class="btn btn-gold" style="margin-top:16px;" onclick="goPage('shop')">Browse Collection</button></div>`;
+    return;
+  }
+  const subtotal = cart.reduce((s,i) => s + i.price * i.qty, 0);
+  const delivery = subtotal > 2000 ? 0 : 99;
+  const total = subtotal + delivery;
+
+  el.innerHTML = `
+    <div style="overflow-x:auto;">
+    <table class="cart-table">
+      <thead><tr><th>Item</th><th>Price</th><th>Quantity</th><th>Subtotal</th><th></th></tr></thead>
+      <tbody>
+        ${cart.map(i => `
+          <tr>
+            <td><span style="font-size:1.4rem;">${i.emoji}</span> ${i.name}</td>
+            <td>₹${i.price.toLocaleString('en-IN')}</td>
+            <td>
+              <div class="qty-ctrl">
+                <button class="qty-btn" onclick="changeQty(${i.id},-1)">−</button>
+                <span>${i.qty}</span>
+                <button class="qty-btn" onclick="changeQty(${i.id},1)">+</button>
+              </div>
+            </td>
+            <td>₹${(i.price*i.qty).toLocaleString('en-IN')}</td>
+            <td><button class="remove-btn" onclick="removeFromCart(${i.id})">🗑</button></td>
+          </tr>`).join('')}
+      </tbody>
+    </table>
+    </div>
+    <div class="cart-summary">
+      <h3>Order Summary</h3>
+      <div class="summary-row"><span>Subtotal</span><span>₹${subtotal.toLocaleString('en-IN')}</span></div>
+      <div class="summary-row"><span>Delivery</span><span>${delivery===0?'<span style="color:var(--success)">FREE</span>':'₹'+delivery}</span></div>
+      ${delivery>0?'<div style="font-size:0.75rem;color:var(--muted);margin-bottom:8px;">Free delivery on orders above ₹2,000</div>':''}
+      <div class="summary-row summary-total"><span>Total</span><span>₹${total.toLocaleString('en-IN')}</span></div>
+      <button class="btn btn-gold" style="width:100%;margin-top:16px;padding:12px;" onclick="openPayment()">Proceed to Payment →</button>
+    </div>`;
+}
+
+function changeQty(id, delta) {
+  let cart = DB.getCart();
+  const item = cart.find(i => i.id === id);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
+  DB.saveCart(cart);
+  updateCartCount();
+  renderCart();
+}
+
+function removeFromCart(id) {
+  let cart = DB.getCart().filter(i => i.id !== id);
+  DB.saveCart(cart);
+  updateCartCount();
+  renderCart();
+  showToast('Item removed from cart');
+}
+
+// ============================================================
+// ORDERS
+// ============================================================
+function renderOrders() {
+  const session = DB.getSession();
+  const el = document.getElementById('orders-content');
+  if (!session) {
+    el.innerHTML = `<div class="empty-state"><div class="icon">🔒</div><p>Please login to view your orders.</p><button class="btn btn-gold" style="margin-top:16px;" onclick="openModal('login')">Login</button></div>`;
+    return;
+  }
+  const allOrders = DB.getOrders();
+  const myOrders = allOrders.filter(o => o.email === session.email).reverse();
+  if (!myOrders.length) {
+    el.innerHTML = `<div class="empty-state"><div class="icon">📦</div><p>You haven't placed any orders yet.</p><button class="btn btn-gold" style="margin-top:16px;" onclick="goPage('shop')">Start Shopping</button></div>`;
+    return;
+  }
+  el.innerHTML = myOrders.map(o => `
+    <div class="order-card">
+      <div class="order-header">
+        <div>
+          <div class="order-id">Order #${o.id}</div>
+          <div class="order-date">${o.date}</div>
+        </div>
+        <span class="status-badge status-${o.status.toLowerCase()}">${o.status}</span>
+      </div>
+      <div class="order-items">
+        ${o.items.map(i => `<div class="order-item"><span>${i.emoji} ${i.name} × ${i.qty}</span><span>₹${(i.price*i.qty).toLocaleString('en-IN')}</span></div>`).join('')}
+        <div style="font-size:0.8rem;color:var(--muted);margin-top:8px;">📍 ${o.address}</div>
+        <div style="font-size:0.8rem;color:var(--muted);">💳 Payment: ${o.paymentMethod}</div>
+      </div>
+      <div class="order-footer">
+        <span>Total Paid</span>
+        <span>₹${o.total.toLocaleString('en-IN')}</span>
+      </div>
+    </div>`).join('');
+}
+
+// ============================================================
+// PROFILE
+// ============================================================
+function renderProfile() {
+  const session = DB.getSession();
+  const el = document.getElementById('profile-content');
+  if (!session) {
+    el.innerHTML = `<div class="empty-state"><div class="icon">👤</div><p>Please login to view your profile.</p><button class="btn btn-gold" style="margin-top:16px;" onclick="openModal('login')">Login</button></div>`;
+    return;
+  }
+  const orders = DB.getOrders().filter(o => o.email === session.email);
+  const total = orders.reduce((s,o) => s + o.total, 0);
+  el.innerHTML = `
+    <div class="profile-card">
+      <div class="profile-avatar">${session.name.charAt(0).toUpperCase()}</div>
+      <div class="profile-name">${session.name}</div>
+      <div class="profile-email">${session.email}</div>
+      ${session.phone ? `<div style="color:var(--muted);font-size:0.85rem;margin-top:4px;">📞 ${session.phone}</div>` : ''}
+      <div style="display:flex;gap:20px;justify-content:center;margin-top:20px;">
+        <div style="text-align:center;"><div style="font-size:1.5rem;font-weight:700;color:var(--rose);">${orders.length}</div><div style="font-size:0.78rem;color:var(--muted);">Orders</div></div>
+        <div style="text-align:center;"><div style="font-size:1.5rem;font-weight:700;color:var(--gold);">₹${total.toLocaleString('en-IN')}</div><div style="font-size:0.78rem;color:var(--muted);">Total Spent</div></div>
+      </div>
+    </div>`;
+}
+
+// ============================================================
+// AUTH
+// ============================================================
+function openModal(type) {
+  document.getElementById('auth-modal').classList.add('open');
+  switchAuth(type);
+}
+function closeModal() { document.getElementById('auth-modal').classList.remove('open'); }
+function switchAuth(type) {
+  document.getElementById('login-form').style.display = type==='login'?'block':'none';
+  document.getElementById('register-form').style.display = type==='register'?'block':'none';
+  document.getElementById('login-alert').innerHTML = '';
+  document.getElementById('reg-alert').innerHTML = '';
+}
+
+function doLogin() {
+  const email = document.getElementById('l-email').value.trim();
+  const pass = document.getElementById('l-pass').value;
+  const users = DB.getUsers();
+  const user = users.find(u => u.email === email && u.password === pass);
+  if (!user) {
+    document.getElementById('login-alert').innerHTML = '<div class="alert alert-error">❌ Invalid email or password.</div>';
+    return;
+  }
+  DB.setSession(user);
+  updateUserUI(user);
+  closeModal();
+  showToast(`Welcome back, ${user.name}! 🪷`);
+}
+
+function doRegister() {
+  const fname = document.getElementById('r-fname').value.trim();
+  const lname = document.getElementById('r-lname').value.trim();
+  const email = document.getElementById('r-email').value.trim();
+  const phone = document.getElementById('r-phone').value.trim();
+  const pass = document.getElementById('r-pass').value;
+  const cpass = document.getElementById('r-cpass').value;
+
+  if (!fname || !email || !pass) { document.getElementById('reg-alert').innerHTML = '<div class="alert alert-error">❌ Please fill all required fields.</div>'; return; }
+  if (pass.length < 6) { document.getElementById('reg-alert').innerHTML = '<div class="alert alert-error">❌ Password must be at least 6 characters.</div>'; return; }
+  if (pass !== cpass) { document.getElementById('reg-alert').innerHTML = '<div class="alert alert-error">❌ Passwords do not match.</div>'; return; }
+
+  const users = DB.getUsers();
+  if (users.find(u => u.email === email)) { document.getElementById('reg-alert').innerHTML = '<div class="alert alert-error">❌ Email already registered. Please login.</div>'; return; }
+
+  const newUser = { name: fname + ' ' + lname, email, phone, password: pass, createdAt: new Date().toLocaleDateString('en-IN') };
+  users.push(newUser);
+  DB.saveUsers(users);
+  DB.setSession(newUser);
+  updateUserUI(newUser);
+  closeModal();
+  showToast(`Account created! Welcome, ${fname}! 🌸`);
+}
+
+function logout() {
+  DB.clearSession();
+  DB.saveCart([]);
+  updateCartCount();
+  document.getElementById('auth-buttons').style.display = 'flex';
+  document.getElementById('user-menu').style.display = 'none';
+  showToast('Logged out successfully.');
+  goPage('home');
+}
+
+function updateUserUI(user) {
+  document.getElementById('auth-buttons').style.display = 'none';
+  document.getElementById('user-menu').style.display = 'flex';
+  document.getElementById('user-greeting').textContent = `Hello, ${user.name.split(' ')[0]}!`;
+}
+
+// ============================================================
+// PAYMENT
+// ============================================================
+function openPayment() {
+  const session = DB.getSession();
+  if (!session) { openModal('login'); return; }
+  const cart = DB.getCart();
+  if (!cart.length) { showToast('Your cart is empty!'); return; }
+
+  const subtotal = cart.reduce((s,i) => s + i.price*i.qty, 0);
+  const delivery = subtotal > 2000 ? 0 : 99;
+  const total = subtotal + delivery;
+
+  document.getElementById('pay-order-summary').innerHTML = cart.map(i =>
+    `<div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:3px 0;color:var(--text);">
+      <span>${i.emoji} ${i.name} × ${i.qty}</span>
+      <span>₹${(i.price*i.qty).toLocaleString('en-IN')}</span>
+    </div>`).join('') +
+    `<div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:3px 0;color:var(--muted);">
+      <span>Delivery</span><span>${delivery===0?'FREE':'₹'+delivery}</span></div>`;
+
+  document.getElementById('pay-total').textContent = '₹' + total.toLocaleString('en-IN');
+  document.getElementById('pay-alert').innerHTML = '';
+  document.getElementById('payment-modal').classList.add('open');
+  selectPayMethodDefault();
+}
+
+function closePayModal() { document.getElementById('payment-modal').classList.remove('open'); }
+
+function selectPayMethodDefault() {
+  selectedPayMethod = 'upi';
+  document.querySelectorAll('.pay-method').forEach((m,i) => m.classList.toggle('active', i===0));
+  ['upi-section','card-section','nb-section','cod-section'].forEach(id => {
+    document.getElementById(id).classList.remove('show');
+    document.getElementById(id).style.display = id==='upi-section'?'block':'none';
+  });
+}
+
+function selectPayMethod(method, el) {
+  selectedPayMethod = method;
+  document.querySelectorAll('.pay-method').forEach(m => m.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('upi-section').style.display = method==='upi'?'block':'none';
+  document.getElementById('card-section').style.display = method==='card'?'block':'none';
+  document.getElementById('nb-section').style.display = method==='netbanking'?'block':'none';
+  document.getElementById('cod-section').style.display = method==='cod'?'block':'none';
+}
+
+function processPayment() {
+  const session = DB.getSession();
+  const address = document.getElementById('pay-address').value.trim();
+  if (!address) { document.getElementById('pay-alert').innerHTML = '<div class="alert alert-error">❌ Please enter a delivery address.</div>'; return; }
+
+  // Validate payment fields
+  if (selectedPayMethod === 'upi') {
+    const upi = document.getElementById('pay-upi').value.trim();
+    if (!upi || !upi.includes('@')) { document.getElementById('pay-alert').innerHTML = '<div class="alert alert-error">❌ Please enter a valid UPI ID.</div>'; return; }
+  }
+  if (selectedPayMethod === 'card') {
+    const cn = document.getElementById('pay-cardno').value.replace(/\s/g,'');
+    const exp = document.getElementById('pay-exp').value.trim();
+    const cvv = document.getElementById('pay-cvv').value.trim();
+    if (cn.length < 16 || !exp || cvv.length < 3) { document.getElementById('pay-alert').innerHTML = '<div class="alert alert-error">❌ Please enter valid card details.</div>'; return; }
+  }
+  if (selectedPayMethod === 'netbanking') {
+    if (!document.getElementById('pay-bank').value) { document.getElementById('pay-alert').innerHTML = '<div class="alert alert-error">❌ Please select a bank.</div>'; return; }
+  }
+
+  const cart = DB.getCart();
+  const subtotal = cart.reduce((s,i) => s + i.price*i.qty, 0);
+  const delivery = subtotal > 2000 ? 0 : 99;
+  const total = subtotal + delivery;
+
+  const order = {
+    id: 'SMG' + Date.now(),
+    email: session.email,
+    items: [...cart],
+    total,
+    address,
+    paymentMethod: selectedPayMethod.toUpperCase(),
+    status: selectedPayMethod === 'cod' ? 'Pending' : 'Confirmed',
+    date: new Date().toLocaleDateString('en-IN', { day:'numeric', month:'long', year:'numeric' })
+  };
+
+  const orders = DB.getOrders();
+  orders.push(order);
+  DB.saveOrders(orders);
+  DB.saveCart([]);
+  updateCartCount();
+  closePayModal();
+  showToast(`🎉 Order #${order.id} placed successfully!`);
+  setTimeout(() => goPage('orders'), 700);
+}
+
+// ============================================================
+// TOAST
+// ============================================================
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3200);
+}
+
+// Format card number input
+document.addEventListener('DOMContentLoaded', () => {
+  const cn = document.getElementById('pay-cardno');
+  if (cn) cn.addEventListener('input', e => {
+    let v = e.target.value.replace(/\D/g,'').substring(0,16);
+    e.target.value = v.replace(/(.{4})/g,'$1 ').trim();
+  });
+  const exp = document.getElementById('pay-exp');
+  if (exp) exp.addEventListener('input', e => {
+    let v = e.target.value.replace(/\D/g,'');
+    if (v.length >= 2) v = v.substring(0,2) + '/' + v.substring(2,4);
+    e.target.value = v;
+  });
 });
-document.getElementById('productList').innerHTML=html;
-}
-
-displayProducts();
-
-function showSection(id){
-document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-document.getElementById(id).classList.add('active');
-}
-
-function showLogin(){showSection('loginPage');}
-
-// SIGNUP
-function signup(){
-let email=document.getElementById('email').value;
-let pass=document.getElementById('password').value;
-
-if(!email || !pass){alert("Enter email & password");return}
-
-auth.createUserWithEmailAndPassword(email,pass)
-.then(()=>{
-alert('Signup successful ✅ Now login');
-})
-.catch(err=>alert(err.message));
-}
-
-// LOGIN
-function login(){
-let email=document.getElementById('email').value;
-let pass=document.getElementById('password').value;
-
-auth.signInWithEmailAndPassword(email,pass)
-.then(user=>{
-currentUser=user.user;
-alert('Login Successful ✅');
-loadProfile();
-showSection('shop');
-})
-.catch(err=>alert(err.message));
-}
-
-function logout(){
-auth.signOut();
-currentUser=null;
-alert('Logged out');
-showSection('home');
-}
-
-// Cart per user
-async function addToCart(id){
-if(!currentUser){alert('Login first');return}
-let item=products.find(p=>p.id===id);
-await db.collection('users').doc(currentUser.uid).collection('cart').add(item);
-alert('Added to cart');
-}
-
-// Order + save history
-async function order(id){
-if(!currentUser){alert('Login first');return}
-let item=products.find(p=>p.id===id);
-await db.collection('users').doc(currentUser.uid).collection('orders').add(item);
-alert('Order placed');
-loadProfile();
-}
-
-// Profile
-async function loadProfile(){
-document.getElementById('userInfo').innerText=currentUser.email;
-let snapshot=await db.collection('users').doc(currentUser.uid).collection('orders').get();
-let html='';
-snapshot.forEach(doc=>{let d=doc.data();html+=`<p>${d.name} - ₹${d.price}</p>`});
-document.getElementById('orderHistory').innerHTML=html;
-}
-
 </script>
-
 </body>
 </html>
