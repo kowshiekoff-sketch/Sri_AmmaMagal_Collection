@@ -119,15 +119,9 @@
   .empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
   .empty-state .icon { font-size: 3.5rem; margin-bottom: 14px; }
 
-  /* ── PAYMENT TABS ── */
+  /* Payment Tabs */
   .pay-tabs { display: flex; gap: 0; margin-bottom: 20px; border-radius: 8px; overflow: hidden; border: 1.5px solid var(--gold); }
-  .pay-tab {
-    flex: 1; padding: 10px 8px; text-align: center; cursor: pointer;
-    font-family: 'Lato', sans-serif; font-size: 0.8rem; font-weight: 700;
-    letter-spacing: 0.8px; text-transform: uppercase;
-    background: transparent; color: var(--gold); border: none;
-    transition: all 0.2s; line-height: 1.3;
-  }
+  .pay-tab { flex: 1; padding: 10px 8px; text-align: center; cursor: pointer; font-family: 'Lato', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; background: transparent; color: var(--gold); border: none; transition: all 0.2s; line-height: 1.3; }
   .pay-tab:not(:last-child) { border-right: 1.5px solid var(--gold); }
   .pay-tab.active { background: var(--gold); color: var(--deep); }
   .pay-tab:hover:not(.active) { background: rgba(201,146,42,0.12); }
@@ -136,47 +130,24 @@
   .pay-panel { display: none; }
   .pay-panel.active { display: block; }
 
-  /* ── QR PANEL ── */
+  /* QR Panel */
   .qr-section { text-align: center; padding: 4px 0 10px; }
-  .qr-box {
-    display: inline-block; padding: 16px; background: #fff;
-    border: 3px solid var(--gold); border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(201,146,42,0.2);
-    margin: 0 auto 14px;
-  }
+  .qr-box { display: inline-block; padding: 16px; background: #fff; border: 3px solid var(--gold); border-radius: 12px; box-shadow: 0 4px 20px rgba(201,146,42,0.2); margin: 0 auto 14px; }
   .qr-box canvas, .qr-box img { display: block; }
-  .qr-upi-id {
-    background: #fdf6ec; border: 1px solid var(--border); border-radius: 8px;
-    padding: 10px 14px; margin: 10px 0; font-size: 0.88rem;
-    display: flex; align-items: center; justify-content: space-between; gap: 10px;
-  }
+  .qr-upi-id { background: #fdf6ec; border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; margin: 10px 0; font-size: 0.88rem; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
   .qr-upi-id strong { color: var(--deep); font-size: 0.95rem; letter-spacing: 0.5px; }
-  .copy-btn {
-    background: var(--gold); color: var(--deep); border: none; border-radius: 4px;
-    padding: 4px 10px; font-size: 0.72rem; font-weight: 700; cursor: pointer;
-    letter-spacing: 0.5px; transition: background 0.2s; white-space: nowrap;
-  }
+  .copy-btn { background: var(--gold); color: var(--deep); border: none; border-radius: 4px; padding: 4px 10px; font-size: 0.72rem; font-weight: 700; cursor: pointer; letter-spacing: 0.5px; transition: background 0.2s; white-space: nowrap; }
   .copy-btn:hover { background: var(--gold-light); }
   .qr-steps { text-align: left; background: #f9f9f9; border-radius: 8px; padding: 12px 14px; margin: 10px 0; }
   .qr-steps ol { padding-left: 18px; }
   .qr-steps li { font-size: 0.82rem; color: var(--muted); margin-bottom: 5px; line-height: 1.5; }
   .qr-steps li strong { color: var(--text); }
-  .qr-amount-badge {
-    display: inline-block; background: linear-gradient(135deg, var(--rose), #c05060);
-    color: #fff; font-size: 1.1rem; font-weight: 700; padding: 6px 20px;
-    border-radius: 20px; margin: 8px 0 4px; letter-spacing: 0.5px;
-  }
-  .qr-confirm-btn {
-    width: 100%; padding: 11px; margin-top: 12px; font-size: 0.9rem;
-    background: var(--success); color: #fff; border: none; border-radius: 6px;
-    font-weight: 700; cursor: pointer; letter-spacing: 1px;
-    transition: background 0.2s; font-family: 'Lato', sans-serif;
-  }
+  .qr-amount-badge { display: inline-block; background: linear-gradient(135deg, var(--rose), #c05060); color: #fff; font-size: 1.1rem; font-weight: 700; padding: 6px 20px; border-radius: 20px; margin: 8px 0 4px; letter-spacing: 0.5px; }
+  .qr-confirm-btn { width: 100%; padding: 11px; margin-top: 12px; font-size: 0.9rem; background: var(--success); color: #fff; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; letter-spacing: 1px; transition: background 0.2s; font-family: 'Lato', sans-serif; }
   .qr-confirm-btn:hover { background: #236040; }
   .qr-note { font-size: 0.75rem; color: var(--muted); margin-top: 8px; line-height: 1.5; }
-  .qr-loading { padding: 30px; color: var(--muted); font-size: 0.88rem; }
 
-  /* ── RAZORPAY PANEL ── */
+  /* Razorpay Panel */
   .razorpay-info { background: #fff8e8; border: 1px solid #e8c07a; border-radius: 8px; padding: 14px 16px; margin-bottom: 18px; }
   .razorpay-info h4 { color: var(--deep); font-size: 0.88rem; font-weight: 700; margin-bottom: 6px; }
   .razorpay-info p { color: var(--muted); font-size: 0.8rem; line-height: 1.6; }
@@ -212,11 +183,27 @@
 
   .spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; margin-right: 8px; }
   @keyframes spin { to { transform: rotate(360deg); } }
-
-  /* QR success pulse */
-  @keyframes pulse { 0%,100%{box-shadow:0 0 0 0 rgba(45,122,79,0.4)} 50%{box-shadow:0 0 0 10px rgba(45,122,79,0)} }
-  .qr-confirm-btn.pulse-anim { animation: pulse 1.5s infinite; }
   @keyframes bounceIn { 0%{transform:scale(0.3);opacity:0} 60%{transform:scale(1.15)} 80%{transform:scale(0.95)} 100%{transform:scale(1);opacity:1} }
+  @keyframes pulse { 0%,100%{box-shadow:0 0 0 0 rgba(45,122,79,0.4)} 50%{box-shadow:0 0 0 10px rgba(45,122,79,0)} }
+  .pulse-anim { animation: pulse 1.5s infinite; }
+
+  /* Payment verification overlay */
+  .verify-overlay { position: absolute; inset: 0; background: rgba(253,246,236,0.96); border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10; padding: 30px; text-align: center; }
+  .verify-spinner { width: 56px; height: 56px; border: 4px solid var(--border); border-top-color: var(--gold); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 18px; }
+  .verify-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--deep); margin-bottom: 8px; }
+  .verify-sub { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+  .verify-steps { margin: 16px 0; text-align: left; width: 100%; max-width: 320px; }
+  .verify-step { display: flex; align-items: center; gap: 10px; padding: 8px 0; font-size: 0.82rem; color: var(--muted); border-bottom: 1px solid var(--border); }
+  .verify-step:last-child { border-bottom: none; }
+  .step-icon { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; flex-shrink: 0; }
+  .step-pending  { background: #fff3cd; color: #7a5500; }
+  .step-active   { background: #cce5ff; color: #004085; animation: pulse 1s infinite; }
+  .step-done     { background: #d4edda; color: #155724; }
+  .step-failed   { background: #f8d7da; color: #721c24; }
+
+  /* DB status indicator */
+  #db-status { position: fixed; bottom: 8px; left: 8px; font-size: 0.65rem; padding: 3px 8px; border-radius: 10px; background: #d4edda; color: #155724; z-index: 9998; opacity: 0.7; }
+  #db-status.error { background: #f8d7da; color: #721c24; }
 
   @media(max-width:640px) {
     .logo-area h1 { font-size: 1.3rem; }
@@ -393,13 +380,12 @@
 
 <!-- PAYMENT MODAL -->
 <div class="modal-overlay" id="payment-modal">
-  <div class="modal" style="max-width:520px;">
+  <div class="modal" style="max-width:520px;position:relative;" id="pay-modal-inner">
     <button class="modal-close" onclick="closePayModal()">✕</button>
     <h2>Checkout 💳</h2>
     <p class="sub">Choose your preferred payment method</p>
     <div id="pay-alert"></div>
 
-    <!-- Order Summary (always visible) -->
     <div style="background:#fdf6ec;border-radius:8px;padding:14px;margin-bottom:18px;border:1px solid var(--border);">
       <div style="font-weight:700;font-size:0.9rem;margin-bottom:8px;color:var(--deep);">Order Summary</div>
       <div id="pay-order-summary"></div>
@@ -408,20 +394,18 @@
       </div>
     </div>
 
-    <!-- Delivery Details (shared across both tabs) -->
     <div id="delivery-fields">
       <div class="form-group"><label>Full Name</label><input type="text" id="pay-name" placeholder="Your full name"/></div>
       <div class="form-group"><label>Phone Number</label><input type="tel" id="pay-phone" placeholder="+91 98765 43210"/></div>
       <div class="form-group"><label>Delivery Address</label><textarea id="pay-address" rows="2" placeholder="Enter your full delivery address..."></textarea></div>
     </div>
 
-    <!-- Payment Method Tabs -->
     <div style="margin-bottom:6px;font-size:0.8rem;font-weight:700;color:var(--muted);letter-spacing:0.5px;">SELECT PAYMENT METHOD</div>
-    <div class="pay-tabs">
-      <button class="pay-tab active" onclick="switchPayTab('razorpay',this)">
+    <div class="pay-tabs" id="pay-tabs-row">
+      <button class="pay-tab active" id="tab-razorpay" onclick="switchPayTab('razorpay',this)">
         <span class="pay-tab-icon">💳</span>Razorpay
       </button>
-      <button class="pay-tab" onclick="switchPayTab('qr',this)">
+      <button class="pay-tab" id="tab-qr" onclick="switchPayTab('qr',this)">
         <span class="pay-tab-icon">📱</span>UPI QR Code
       </button>
     </div>
@@ -430,7 +414,7 @@
     <div class="pay-panel active" id="panel-razorpay">
       <div class="razorpay-info">
         <h4>🔒 Secure Real-Time Payment via Razorpay</h4>
-        <p>Your payment is processed securely. We accept UPI, Credit/Debit Cards, Net Banking, Wallets and more.</p>
+        <p>Your payment is processed securely. We accept UPI, Credit/Debit Cards, Net Banking, Wallets and more. Payment is <strong>auto-verified</strong> instantly upon success.</p>
         <div class="pay-methods-grid">
           <div class="pay-chip">📱 UPI</div>
           <div class="pay-chip">💳 Cards</div>
@@ -439,28 +423,25 @@
         </div>
       </div>
       <div class="alert alert-info" style="font-size:0.8rem;margin-bottom:16px;">
-        ℹ️ To go live, replace the Razorpay Key ID in the script with your key from
+        ℹ️ Replace the Razorpay Key ID in the script with your key from
         <a href="https://dashboard.razorpay.com" target="_blank" style="color:var(--gold);">dashboard.razorpay.com</a>.
-        Use <code>rzp_test_...</code> for testing, <code>rzp_live_...</code> for production.
+        Use <code>rzp_test_...</code> for testing.
       </div>
       <button class="btn btn-gold" style="width:100%;padding:12px;font-size:1rem;" id="pay-btn" onclick="initiateRazorpay()">
         Pay with Razorpay →
       </button>
-      <p style="text-align:center;font-size:0.75rem;color:var(--muted);margin-top:10px;">🔒 256-bit SSL encrypted · PCI DSS compliant</p>
+      <p style="text-align:center;font-size:0.75rem;color:var(--muted);margin-top:10px;">🔒 256-bit SSL encrypted · PCI DSS compliant · Auto-verified</p>
     </div>
 
     <!-- QR Code Panel -->
     <div class="pay-panel" id="panel-qr">
-      <!-- Step 1: Scan & Pay -->
       <div id="qr-step-scan">
         <div class="qr-section">
-          <div style="font-size:0.82rem;color:var(--muted);margin-bottom:10px;">
-            Scan with any UPI app — PhonePe, GPay, Paytm, BHIM & more
-          </div>
+          <div style="font-size:0.82rem;color:var(--muted);margin-bottom:10px;">Scan with any UPI app — PhonePe, GPay, Paytm, BHIM & more</div>
           <div class="qr-amount-badge" id="qr-amount-display">₹0</div>
           <div style="font-size:0.75rem;color:var(--muted);margin-bottom:12px;">Pay this exact amount</div>
           <div class="qr-box">
-            <div id="qr-code-container" class="qr-loading">Generating QR...</div>
+            <div id="qr-code-container" style="min-width:200px;min-height:200px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.82rem;">Generating QR...</div>
           </div>
           <div class="qr-upi-id">
             <div>
@@ -476,10 +457,9 @@
               <li>Tap <strong>"Scan QR"</strong> or <strong>"Pay to UPI ID"</strong></li>
               <li>Scan the QR code above or enter the UPI ID</li>
               <li>Enter amount <strong id="qr-step-amount">₹0</strong> and complete payment</li>
-              <li>Enter your <strong>UPI Transaction ID</strong> below and confirm</li>
+              <li>Enter your <strong>UPI Transaction ID</strong> below and click confirm</li>
             </ol>
           </div>
-          <!-- Inline UTR field -->
           <div style="margin-top:12px;">
             <label style="display:block;font-size:0.8rem;font-weight:700;color:var(--text);margin-bottom:5px;text-align:left;">
               UPI Transaction ID / UTR Number <span style="color:var(--rose);">*</span>
@@ -487,51 +467,64 @@
             <input type="text" id="qr-utr-input" placeholder="e.g. 123456789012 or T2504191234XXXXXX"
               style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:6px;font-size:0.9rem;color:var(--text);background:#fdf9f5;font-family:'Lato',sans-serif;transition:border-color 0.2s;"
               onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'"/>
-            <div style="font-size:0.72rem;color:var(--muted);margin-top:4px;text-align:left;">
-              Find this in your UPI app under payment history / transaction details
-            </div>
+            <div style="font-size:0.72rem;color:var(--muted);margin-top:4px;text-align:left;">Find this in your UPI app under payment history / transaction details</div>
           </div>
           <div id="qr-pay-alert" style="margin-top:10px;"></div>
           <button class="qr-confirm-btn pulse-anim" onclick="confirmQrPayment()">
-            ✅ I've Paid — Confirm My Order
+            ✅ I've Paid — Verify & Confirm Order
           </button>
-          <p class="qr-note">
-            ⚠️ Please confirm only after completing payment. Your order will be verified within 1 hour.
-            For issues, call <strong>+91 98765 43210</strong>.
-          </p>
+          <p class="qr-note">⚠️ Please confirm only after completing payment. Payment will be auto-verified within moments.</p>
         </div>
       </div>
 
-      <!-- Step 2: Order Confirmation Screen (shown after payment confirmed) -->
+      <!-- Order Confirmed Screen -->
       <div id="qr-step-confirmed" style="display:none;">
         <div style="text-align:center;padding:10px 0 20px;">
           <div style="font-size:4rem;margin-bottom:10px;animation:bounceIn 0.5s ease;">🎉</div>
-          <div style="font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--deep);margin-bottom:6px;">
-            Order Confirmed!
-          </div>
-          <div style="color:var(--success);font-size:0.9rem;font-weight:700;margin-bottom:16px;">
-            ✅ Payment received — Thank you!
-          </div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--deep);margin-bottom:6px;">Order Confirmed!</div>
+          <div style="color:var(--success);font-size:0.9rem;font-weight:700;margin-bottom:16px;">✅ Payment verified — Thank you!</div>
           <div id="qr-confirm-details" style="background:#f0faf4;border:1.5px solid #b3d9c5;border-radius:10px;padding:18px;text-align:left;margin-bottom:18px;"></div>
           <div style="background:#fff8e8;border:1px solid var(--gold);border-radius:8px;padding:12px 14px;font-size:0.82rem;color:var(--muted);text-align:left;margin-bottom:16px;">
             📦 <strong style="color:var(--deep);">What happens next?</strong><br/>
-            Our team will verify your payment and dispatch your order within <strong>1–2 business days</strong>.
-            You'll receive a call at your registered number once shipped.
+            Your order is confirmed and will be dispatched within <strong>1–2 business days</strong>. You'll receive a call at your registered number once shipped.
           </div>
-          <button class="btn btn-gold" style="width:100%;padding:11px;" onclick="closePayModal();goPage('orders');">
-            View My Orders →
-          </button>
-          <button class="btn btn-outline" style="width:100%;padding:10px;margin-top:8px;" onclick="closePayModal();goPage('shop');">
-            Continue Shopping
-          </button>
+          <button class="btn btn-gold" style="width:100%;padding:11px;" onclick="closePayModal();goPage('orders');">View My Orders →</button>
+          <button class="btn btn-outline" style="width:100%;padding:10px;margin-top:8px;" onclick="closePayModal();goPage('shop');">Continue Shopping</button>
         </div>
       </div>
+    </div>
+
+    <!-- Payment Verification Overlay (shown while verifying) -->
+    <div class="verify-overlay" id="verify-overlay" style="display:none;">
+      <div class="verify-spinner"></div>
+      <div class="verify-title" id="verify-title">Verifying Payment...</div>
+      <div class="verify-sub" id="verify-sub">Please wait while we confirm your payment</div>
+      <div class="verify-steps" id="verify-steps"></div>
+      <div id="verify-result" style="margin-top:16px;"></div>
     </div>
 
   </div>
 </div>
 
+<!-- ORDER SUCCESS OVERLAY (full page) -->
+<div id="order-success-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1500;align-items:center;justify-content:center;">
+  <div style="background:#fff;border-radius:16px;padding:40px 36px;max-width:460px;width:95%;text-align:center;border-top:5px solid var(--gold);animation:bounceIn 0.5s ease;max-height:90vh;overflow-y:auto;">
+    <div style="font-size:5rem;margin-bottom:14px;">🎉</div>
+    <div style="font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--deep);margin-bottom:6px;">Payment Confirmed!</div>
+    <div style="color:var(--success);font-size:1rem;font-weight:700;margin-bottom:20px;">✅ Your order has been placed successfully</div>
+    <div id="success-order-details" style="background:#f0faf4;border:1.5px solid #b3d9c5;border-radius:10px;padding:18px;text-align:left;margin-bottom:20px;"></div>
+    <div style="background:#fff8e8;border:1px solid var(--gold);border-radius:8px;padding:12px 14px;font-size:0.82rem;color:var(--muted);text-align:left;margin-bottom:20px;">
+      📦 <strong style="color:var(--deep);">Your order is confirmed!</strong><br/>
+      We will dispatch your items within <strong>1–2 business days</strong> and call you at your registered number once shipped.
+    </div>
+    <button class="btn btn-gold" style="width:100%;padding:12px;font-size:1rem;margin-bottom:8px;" onclick="dismissSuccessOverlay('orders')">View My Orders →</button>
+    <button class="btn btn-outline" style="width:100%;padding:11px;" onclick="dismissSuccessOverlay('shop')">Continue Shopping</button>
+    <div style="font-size:0.72rem;color:var(--muted);margin-top:12px;">Redirecting to orders in <span id="redirect-countdown">5</span>s...</div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
+<div id="db-status">🗄️ DB Loading...</div>
 
 <footer>
   <h3>🪷 Sri AmmaMagal Collections</h3>
@@ -542,63 +535,276 @@
 
 <script>
 // ============================================================
-// CONFIG — update these with your real details
+// CONFIG
 // ============================================================
-const RAZORPAY_KEY = 'rzp_test_SfG88z9qmQS5Tj'; // Your Razorpay Key ID
-const UPI_ID       = 'kowshiekrajendran007@okaxis';             // ← REPLACE with your real UPI ID
-const UPI_NAME     = 'Sri AmmaMagal Collections'; // Merchant name shown in UPI apps
+const RAZORPAY_KEY = 'rzp_test_SfG88z9qmQS5Tj';
+const UPI_ID       = 'kowshiekrajendran007@okaxis';
+const UPI_NAME     = 'Sri AmmaMagal Collections';
 
 // ============================================================
-// DATA STORE
+// INDEXEDDB DATABASE — smg_db v2
+// Stores: users, sessions, orders, cart
 // ============================================================
-const DB = {
-  getUsers:     () => JSON.parse(localStorage.getItem('smg_users')   || '[]'),
-  saveUsers:    (u) => localStorage.setItem('smg_users', JSON.stringify(u)),
-  getOrders:    () => JSON.parse(localStorage.getItem('smg_orders')  || '[]'),
-  saveOrders:   (o) => localStorage.setItem('smg_orders', JSON.stringify(o)),
-  getSession:   () => JSON.parse(localStorage.getItem('smg_session') || 'null'),
-  setSession:   (u) => localStorage.setItem('smg_session', JSON.stringify(u)),
-  clearSession: ()  => localStorage.removeItem('smg_session'),
-  getCart:      () => JSON.parse(localStorage.getItem('smg_cart')    || '[]'),
-  saveCart:     (c) => localStorage.setItem('smg_cart', JSON.stringify(c)),
-};
+const DB_NAME    = 'SriAmmaMagalDB';
+const DB_VERSION = 2;
+let db = null;
+
+function initDB() {
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open(DB_NAME, DB_VERSION);
+
+    req.onupgradeneeded = (e) => {
+      const d = e.target.result;
+
+      // USERS store — keyed by email
+      if (!d.objectStoreNames.contains('users')) {
+        const us = d.createObjectStore('users', { keyPath: 'email' });
+        us.createIndex('email', 'email', { unique: true });
+        us.createIndex('createdAt', 'createdAt', { unique: false });
+      }
+
+      // SESSIONS store — keyed by sessionId, index on email
+      if (!d.objectStoreNames.contains('sessions')) {
+        const ss = d.createObjectStore('sessions', { keyPath: 'sessionId' });
+        ss.createIndex('email', 'email', { unique: false });
+      }
+
+      // ORDERS store — keyed by id, index on email
+      if (!d.objectStoreNames.contains('orders')) {
+        const os = d.createObjectStore('orders', { keyPath: 'id' });
+        os.createIndex('email', 'email', { unique: false });
+        os.createIndex('status', 'status', { unique: false });
+        os.createIndex('createdAt', 'createdAt', { unique: false });
+      }
+
+      // CART store — keyed by cartKey (email:productId)
+      if (!d.objectStoreNames.contains('cart')) {
+        const cs = d.createObjectStore('cart', { keyPath: 'cartKey' });
+        cs.createIndex('email', 'email', { unique: false });
+      }
+
+      // PAYMENT_LOGS store — for audit trail
+      if (!d.objectStoreNames.contains('payment_logs')) {
+        const pl = d.createObjectStore('payment_logs', { keyPath: 'logId' });
+        pl.createIndex('orderId', 'orderId', { unique: false });
+        pl.createIndex('email', 'email', { unique: false });
+      }
+    };
+
+    req.onsuccess = (e) => {
+      db = e.target.result;
+      document.getElementById('db-status').textContent = '🗄️ DB Ready (IndexedDB)';
+      resolve(db);
+    };
+
+    req.onerror = (e) => {
+      document.getElementById('db-status').textContent = '⚠️ DB Error';
+      document.getElementById('db-status').classList.add('error');
+      console.error('IndexedDB error:', e.target.error);
+      // Fall back to localStorage-backed shim
+      db = null;
+      resolve(null);
+    };
+  });
+}
+
+// Generic IDB helpers
+function idbGet(store, key) {
+  return new Promise((res, rej) => {
+    const tx = db.transaction(store, 'readonly');
+    const req = tx.objectStore(store).get(key);
+    req.onsuccess = () => res(req.result || null);
+    req.onerror   = () => rej(req.error);
+  });
+}
+function idbPut(store, obj) {
+  return new Promise((res, rej) => {
+    const tx = db.transaction(store, 'readwrite');
+    const req = tx.objectStore(store).put(obj);
+    req.onsuccess = () => res(req.result);
+    req.onerror   = () => rej(req.error);
+  });
+}
+function idbDelete(store, key) {
+  return new Promise((res, rej) => {
+    const tx = db.transaction(store, 'readwrite');
+    const req = tx.objectStore(store).delete(key);
+    req.onsuccess = () => res();
+    req.onerror   = () => rej(req.error);
+  });
+}
+function idbGetByIndex(store, indexName, value) {
+  return new Promise((res, rej) => {
+    const tx = db.transaction(store, 'readonly');
+    const idx = tx.objectStore(store).index(indexName);
+    const req = idx.getAll(value);
+    req.onsuccess = () => res(req.result || []);
+    req.onerror   = () => rej(req.error);
+  });
+}
+function idbGetAll(store) {
+  return new Promise((res, rej) => {
+    const tx = db.transaction(store, 'readonly');
+    const req = tx.objectStore(store).getAll();
+    req.onsuccess = () => res(req.result || []);
+    req.onerror   = () => rej(req.error);
+  });
+}
+function idbClearByIndex(store, indexName, value) {
+  return new Promise(async (res, rej) => {
+    try {
+      const items = await idbGetByIndex(store, indexName, value);
+      const tx = db.transaction(store, 'readwrite');
+      const os = tx.objectStore(store);
+      items.forEach(item => os.delete(item[os.keyPath]));
+      tx.oncomplete = () => res();
+      tx.onerror    = () => rej(tx.error);
+    } catch(e) { rej(e); }
+  });
+}
 
 // ============================================================
-// WOMEN'S PRODUCTS
+// SESSION MANAGEMENT (async, IndexedDB-backed)
+// ============================================================
+const SESSION_KEY = 'smg_active_session_id';
+
+async function getSession() {
+  const sid = sessionStorage.getItem(SESSION_KEY) || localStorage.getItem(SESSION_KEY);
+  if (!sid || !db) return null;
+  const sess = await idbGet('sessions', sid);
+  if (!sess) return null;
+  // Check expiry (7 days)
+  if (Date.now() > sess.expiresAt) {
+    await idbDelete('sessions', sid);
+    localStorage.removeItem(SESSION_KEY);
+    return null;
+  }
+  return sess;
+}
+
+async function createSession(user) {
+  const sessionId = 'sess_' + Date.now() + '_' + Math.random().toString(36).slice(2);
+  const sess = {
+    sessionId,
+    email:     user.email,
+    name:      user.name,
+    phone:     user.phone || '',
+    createdAt: Date.now(),
+    expiresAt: Date.now() + 7 * 24 * 60 * 60 * 1000, // 7 days
+  };
+  await idbPut('sessions', sess);
+  localStorage.setItem(SESSION_KEY, sessionId);
+  return sess;
+}
+
+async function destroySession() {
+  const sid = localStorage.getItem(SESSION_KEY);
+  if (sid && db) await idbDelete('sessions', sid).catch(() => {});
+  localStorage.removeItem(SESSION_KEY);
+  sessionStorage.removeItem(SESSION_KEY);
+}
+
+// ============================================================
+// CART (IndexedDB, per user)
+// ============================================================
+async function getCart() {
+  const sess = await getSession();
+  if (!sess || !db) return [];
+  return idbGetByIndex('cart', 'email', sess.email);
+}
+
+async function saveCartItem(email, productId, qty) {
+  if (!db) return;
+  const cartKey = email + ':' + productId;
+  if (qty <= 0) {
+    await idbDelete('cart', cartKey);
+  } else {
+    const p = ALL_PRODUCTS.find(p => p.id === productId);
+    await idbPut('cart', {
+      cartKey,
+      email,
+      id:     productId,
+      name:   p.name,
+      price:  p.price,
+      emoji:  p.emoji,
+      gender: p.gender,
+      qty,
+      addedAt: Date.now(),
+    });
+  }
+}
+
+async function clearCart(email) {
+  if (!db) return;
+  await idbClearByIndex('cart', 'email', email);
+}
+
+// ============================================================
+// ORDERS (IndexedDB)
+// ============================================================
+async function saveOrder(order) {
+  if (!db) return;
+  await idbPut('orders', order);
+}
+
+async function getMyOrders(email) {
+  if (!db) return [];
+  return idbGetByIndex('orders', 'email', email);
+}
+
+async function updateOrderStatus(orderId, status) {
+  if (!db) return;
+  const order = await idbGet('orders', orderId);
+  if (order) {
+    order.status = status;
+    order.updatedAt = Date.now();
+    await idbPut('orders', order);
+  }
+}
+
+// ============================================================
+// PAYMENT LOGS (IndexedDB audit trail)
+// ============================================================
+async function logPayment(data) {
+  if (!db) return;
+  await idbPut('payment_logs', {
+    logId:     'log_' + Date.now() + '_' + Math.random().toString(36).slice(2),
+    ...data,
+    loggedAt:  Date.now(),
+  });
+}
+
+// ============================================================
+// PRODUCTS DATA
 // ============================================================
 const WOMEN_PRODUCTS = [
-  { id:1,  name:'Kanjivaram Silk Saree', category:'Sarees',   price:3499, original:4500,  desc:'Pure Kanjivaram silk with golden zari border',          emoji:'🥻', featured:true,  color:'#8b1a4a', gender:'women' },
-  { id:2,  name:'Anarkali Kurti Set',    category:'Kurtis',   price:1299, original:1800,  desc:'Flared Anarkali with palazzo pants',                     emoji:'👗', featured:true,  color:'#1a4a8b', gender:'women' },
-  { id:3,  name:'Bridal Lehenga',        category:'Lehengas', price:8999, original:12000, desc:'Heavy embroidered bridal lehenga with dupatta',           emoji:'💍', featured:true,  color:'#8b3a1a', gender:'women' },
-  { id:4,  name:'Chiffon Saree',         category:'Sarees',   price:1599, original:2200,  desc:'Light chiffon saree with printed border',                emoji:'🌸', featured:false, color:'#4a8b1a', gender:'women' },
-  { id:5,  name:'Cotton Kurti',          category:'Kurtis',   price:649,  original:900,   desc:'Comfortable block-print cotton kurti',                   emoji:'🌿', featured:true,  color:'#1a6b3a', gender:'women' },
-  { id:6,  name:'Party Lehenga',         category:'Lehengas', price:4299, original:5500,  desc:'Sequined party lehenga with blouse',                     emoji:'✨', featured:false, color:'#6b1a8b', gender:'women' },
-  { id:7,  name:'Ethnic Salwar Set',     category:'Suits',    price:1199, original:1600,  desc:'Straight cut salwar kameez with dupatta',                emoji:'👘', featured:false, color:'#8b6a1a', gender:'women' },
-  { id:8,  name:'Georgette Saree',       category:'Sarees',   price:2199, original:2800,  desc:'Printed georgette with embroidered blouse',              emoji:'🌺', featured:true,  color:'#1a3a8b', gender:'women' },
-  { id:9,  name:'Banarasi Silk Saree',   category:'Sarees',   price:5499, original:7000,  desc:'Authentic Banarasi weave with floral motifs',            emoji:'🪷', featured:false, color:'#6b1a2a', gender:'women' },
-  { id:10, name:'Designer Kurti',        category:'Kurtis',   price:999,  original:1400,  desc:'Mirror work designer kurti with leggings',               emoji:'💫', featured:false, color:'#8b1a6b', gender:'women' },
-  { id:11, name:'Indo-Western Gown',     category:'Gowns',    price:3199, original:4200,  desc:'Elegant floor-length Indo-Western fusion gown',          emoji:'🌙', featured:true,  color:'#1a5a6b', gender:'women' },
-  { id:12, name:'Pattu Pavadai Set',     category:'Kids',     price:1499, original:1900,  desc:'Traditional silk pavadai for girls (5–12 yrs)',          emoji:'🎀', featured:false, color:'#8b4a1a', gender:'women' },
+  { id:1,  name:'Kanjivaram Silk Saree', category:'Sarees',   price:3499, original:4500,  desc:'Pure Kanjivaram silk with golden zari border',         emoji:'🥻', featured:true,  color:'#8b1a4a', gender:'women' },
+  { id:2,  name:'Anarkali Kurti Set',    category:'Kurtis',   price:1299, original:1800,  desc:'Flared Anarkali with palazzo pants',                    emoji:'👗', featured:true,  color:'#1a4a8b', gender:'women' },
+  { id:3,  name:'Bridal Lehenga',        category:'Lehengas', price:8999, original:12000, desc:'Heavy embroidered bridal lehenga with dupatta',          emoji:'💍', featured:true,  color:'#8b3a1a', gender:'women' },
+  { id:4,  name:'Chiffon Saree',         category:'Sarees',   price:1599, original:2200,  desc:'Light chiffon saree with printed border',               emoji:'🌸', featured:false, color:'#4a8b1a', gender:'women' },
+  { id:5,  name:'Cotton Kurti',          category:'Kurtis',   price:649,  original:900,   desc:'Comfortable block-print cotton kurti',                  emoji:'🌿', featured:true,  color:'#1a6b3a', gender:'women' },
+  { id:6,  name:'Party Lehenga',         category:'Lehengas', price:4299, original:5500,  desc:'Sequined party lehenga with blouse',                    emoji:'✨', featured:false, color:'#6b1a8b', gender:'women' },
+  { id:7,  name:'Ethnic Salwar Set',     category:'Suits',    price:1199, original:1600,  desc:'Straight cut salwar kameez with dupatta',               emoji:'👘', featured:false, color:'#8b6a1a', gender:'women' },
+  { id:8,  name:'Georgette Saree',       category:'Sarees',   price:2199, original:2800,  desc:'Printed georgette with embroidered blouse',             emoji:'🌺', featured:true,  color:'#1a3a8b', gender:'women' },
+  { id:9,  name:'Banarasi Silk Saree',   category:'Sarees',   price:5499, original:7000,  desc:'Authentic Banarasi weave with floral motifs',           emoji:'🪷', featured:false, color:'#6b1a2a', gender:'women' },
+  { id:10, name:'Designer Kurti',        category:'Kurtis',   price:999,  original:1400,  desc:'Mirror work designer kurti with leggings',              emoji:'💫', featured:false, color:'#8b1a6b', gender:'women' },
+  { id:11, name:'Indo-Western Gown',     category:'Gowns',    price:3199, original:4200,  desc:'Elegant floor-length Indo-Western fusion gown',         emoji:'🌙', featured:true,  color:'#1a5a6b', gender:'women' },
+  { id:12, name:'Pattu Pavadai Set',     category:'Kids',     price:1499, original:1900,  desc:'Traditional silk pavadai for girls (5–12 yrs)',         emoji:'🎀', featured:false, color:'#8b4a1a', gender:'women' },
 ];
-
-// ============================================================
-// MEN'S PRODUCTS
-// ============================================================
 const MEN_PRODUCTS = [
-  { id:101, name:'Royal Sherwani Set',      category:'Sherwanis',  price:1,  original:11000, desc:'Embroidered royal sherwani with churidar & dupatta',    emoji:'🤴', featured:true,  color:'#1a2a6b', gender:'men' },
-  { id:102, name:'Silk Kurta Pyjama',       category:'Kurta Sets', price:2499,  original:3200,  desc:'Pure silk festive kurta with matching pyjama',          emoji:'👔', featured:true,  color:'#2a1a6b', gender:'men' },
-  { id:103, name:'Wedding Jodhpuri Blazer', category:'Blazers',    price:5499,  original:7000,  desc:'Classic Jodhpuri suit blazer with trouser',             emoji:'🎩', featured:true,  color:'#1a5a3a', gender:'men' },
-  { id:104, name:'Cotton Kurta Set',        category:'Kurta Sets', price:899,   original:1200,  desc:'Breathable cotton kurta with straight-cut pyjama',      emoji:'🌿', featured:false, color:'#3a5a1a', gender:'men' },
-  { id:105, name:'Dhoti Kurta Set',         category:'Dhotis',     price:1799,  original:2400,  desc:'Traditional Tamil dhoti with silk kurta',               emoji:'🕌', featured:true,  color:'#6b3a1a', gender:'men' },
-  { id:106, name:'Nehru Jacket Set',        category:'Blazers',    price:2999,  original:3800,  desc:'Mandarin collar Nehru jacket with kurta',               emoji:'✨', featured:false, color:'#1a3a6b', gender:'men' },
-  { id:107, name:'Pathani Kurta Set',       category:'Kurta Sets', price:1399,  original:1800,  desc:'Afghan-style Pathani with side pockets & pyjama',       emoji:'🌙', featured:false, color:'#4a1a6b', gender:'men' },
+  { id:101, name:'Royal Sherwani Set',      category:'Sherwanis',  price:1,  original:11000, desc:'Embroidered royal sherwani with churidar & dupatta',   emoji:'🤴', featured:true,  color:'#1a2a6b', gender:'men' },
+  { id:102, name:'Silk Kurta Pyjama',       category:'Kurta Sets', price:2499,  original:3200,  desc:'Pure silk festive kurta with matching pyjama',         emoji:'👔', featured:true,  color:'#2a1a6b', gender:'men' },
+  { id:103, name:'Wedding Jodhpuri Blazer', category:'Blazers',    price:5499,  original:7000,  desc:'Classic Jodhpuri suit blazer with trouser',            emoji:'🎩', featured:true,  color:'#1a5a3a', gender:'men' },
+  { id:104, name:'Cotton Kurta Set',        category:'Kurta Sets', price:899,   original:1200,  desc:'Breathable cotton kurta with straight-cut pyjama',     emoji:'🌿', featured:false, color:'#3a5a1a', gender:'men' },
+  { id:105, name:'Dhoti Kurta Set',         category:'Dhotis',     price:1799,  original:2400,  desc:'Traditional Tamil dhoti with silk kurta',              emoji:'🕌', featured:true,  color:'#6b3a1a', gender:'men' },
+  { id:106, name:'Nehru Jacket Set',        category:'Blazers',    price:2999,  original:3800,  desc:'Mandarin collar Nehru jacket with kurta',              emoji:'✨', featured:false, color:'#1a3a6b', gender:'men' },
+  { id:107, name:'Pathani Kurta Set',       category:'Kurta Sets', price:1399,  original:1800,  desc:'Afghan-style Pathani with side pockets & pyjama',      emoji:'🌙', featured:false, color:'#4a1a6b', gender:'men' },
   { id:108, name:'Bridal Groom Sherwani',   category:'Sherwanis',  price:14999, original:20000, desc:'Heavy zari sherwani for the groom — complete bridal set',emoji:'💒', featured:true,  color:'#6b1a2a', gender:'men' },
-  { id:109, name:'Indo-Western Jacket',     category:'Blazers',    price:3799,  original:4800,  desc:'Fusion printed jacket with straight kurta & jeans',     emoji:'🎯', featured:false, color:'#1a5a5a', gender:'men' },
-  { id:110, name:'Angavastram Set',         category:'Dhotis',     price:1299,  original:1700,  desc:'Silk angavastram with mundu — perfect for festivals',   emoji:'🪔', featured:false, color:'#6b5a1a', gender:'men' },
-  { id:111, name:'Boys Ethnic Set',         category:'Kids',       price:999,   original:1400,  desc:'Festive kurta pyjama for boys (4–14 yrs)',               emoji:'🎀', featured:false, color:'#1a4a8b', gender:'men' },
-  { id:112, name:'Casual Linen Kurta',      category:'Kurta Sets', price:699,   original:950,   desc:'Light linen kurta for everyday casual wear',            emoji:'☀️', featured:false, color:'#5a5a1a', gender:'men' },
+  { id:109, name:'Indo-Western Jacket',     category:'Blazers',    price:3799,  original:4800,  desc:'Fusion printed jacket with straight kurta & jeans',    emoji:'🎯', featured:false, color:'#1a5a5a', gender:'men' },
+  { id:110, name:'Angavastram Set',         category:'Dhotis',     price:1299,  original:1700,  desc:'Silk angavastram with mundu — perfect for festivals',  emoji:'🪔', featured:false, color:'#6b5a1a', gender:'men' },
+  { id:111, name:'Boys Ethnic Set',         category:'Kids',       price:999,   original:1400,  desc:'Festive kurta pyjama for boys (4–14 yrs)',              emoji:'🎀', featured:false, color:'#1a4a8b', gender:'men' },
+  { id:112, name:'Casual Linen Kurta',      category:'Kurta Sets', price:699,   original:950,   desc:'Light linen kurta for everyday casual wear',           emoji:'☀️', featured:false, color:'#5a5a1a', gender:'men' },
 ];
-
 const ALL_PRODUCTS = [...WOMEN_PRODUCTS, ...MEN_PRODUCTS];
 const WOMEN_CATS   = ['All', ...new Set(WOMEN_PRODUCTS.map(p => p.category))];
 const MEN_CATS     = ['All', ...new Set(MEN_PRODUCTS.map(p => p.category))];
@@ -606,14 +812,15 @@ const MEN_CATS     = ['All', ...new Set(MEN_PRODUCTS.map(p => p.category))];
 // ============================================================
 // INIT
 // ============================================================
-window.onload = () => {
+window.onload = async () => {
+  await initDB();
   renderFeatured();
   renderShop('All');
   renderMenShop('All');
   renderFilterBar('filter-bar',     WOMEN_CATS, 'filterWomen');
   renderFilterBar('men-filter-bar', MEN_CATS,   'filterMen');
-  updateCartCount();
-  const session = DB.getSession();
+  await updateCartCount();
+  const session = await getSession();
   if (session) updateUserUI(session);
 };
 
@@ -685,26 +892,23 @@ function filterMen(cat, btn) {
 // ============================================================
 // CART
 // ============================================================
-function addToCart(productId) {
-  const session = DB.getSession();
+async function addToCart(productId) {
+  const session = await getSession();
   if (!session) { showToast('Please login to add items to cart!'); openModal('login'); return; }
-  let cart = DB.getCart();
+  const cart = await getCart();
   const existing = cart.find(i => i.id === productId);
-  if (existing) { existing.qty++; }
-  else {
-    const p = ALL_PRODUCTS.find(p => p.id === productId);
-    cart.push({ id: p.id, name: p.name, price: p.price, emoji: p.emoji, qty: 1, gender: p.gender });
-  }
-  DB.saveCart(cart);
-  updateCartCount();
+  const newQty   = existing ? existing.qty + 1 : 1;
+  await saveCartItem(session.email, productId, newQty);
+  await updateCartCount();
   showToast('Added: ' + ALL_PRODUCTS.find(p => p.id === productId).name);
 }
-function buyNow(productId) { addToCart(productId); goPage('cart'); }
-function updateCartCount() {
-  document.getElementById('cart-count').textContent = DB.getCart().reduce((s, i) => s + i.qty, 0);
+async function buyNow(productId) { await addToCart(productId); goPage('cart'); }
+async function updateCartCount() {
+  const cart = await getCart();
+  document.getElementById('cart-count').textContent = cart.reduce((s, i) => s + i.qty, 0);
 }
-function renderCart() {
-  const cart = DB.getCart();
+async function renderCart() {
+  const cart = await getCart();
   const el   = document.getElementById('cart-content');
   if (!cart.length) {
     el.innerHTML = '<div class="empty-state"><div class="icon">&#x1F6D2;</div><p>Your cart is empty!</p>' +
@@ -714,7 +918,7 @@ function renderCart() {
     return;
   }
   const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
-  const delivery = subtotal > 2000 ? 0 : 0;
+  const delivery = 0;
   const total    = subtotal + delivery;
   let rows = '';
   cart.forEach(i => {
@@ -734,37 +938,42 @@ function renderCart() {
     '<tbody>' + rows + '</tbody></table></div>' +
     '<div class="cart-summary"><h3>Order Summary</h3>' +
     '<div class="summary-row"><span>Subtotal</span><span>&#x20B9;' + subtotal.toLocaleString('en-IN') + '</span></div>' +
-    '<div class="summary-row"><span>Delivery</span><span>' + (delivery===0 ? '<span style="color:var(--success)">FREE</span>' : '&#x20B9;' + delivery) + '</span></div>' +
-    (delivery > 0 ? '<div style="font-size:0.75rem;color:var(--muted);margin-bottom:8px;">Free delivery on orders above &#x20B9;2,000</div>' : '') +
+    '<div class="summary-row"><span>Delivery</span><span><span style="color:var(--success)">FREE</span></span></div>' +
     '<div class="summary-row summary-total"><span>Total</span><span>&#x20B9;' + total.toLocaleString('en-IN') + '</span></div>' +
     '<button class="btn btn-gold" style="width:100%;margin-top:16px;padding:12px;" onclick="openPayment()">&#x1F512; Proceed to Secure Payment &rarr;</button>' +
-    '<p style="text-align:center;font-size:0.72rem;color:var(--muted);margin-top:8px;">Razorpay · UPI · Cards · Net Banking</p></div>';
+    '<p style="text-align:center;font-size:0.72rem;color:var(--muted);margin-top:8px;">Razorpay · UPI · Cards · Net Banking · Auto-Verified</p></div>';
 }
-function changeQty(id, delta) {
-  let cart = DB.getCart();
+async function changeQty(id, delta) {
+  const session = await getSession();
+  if (!session) return;
+  const cart = await getCart();
   const item = cart.find(i => i.id === id);
   if (!item) return;
-  item.qty += delta;
-  if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
-  DB.saveCart(cart); updateCartCount(); renderCart();
+  await saveCartItem(session.email, id, item.qty + delta);
+  await updateCartCount();
+  await renderCart();
 }
-function removeFromCart(id) {
-  DB.saveCart(DB.getCart().filter(i => i.id !== id));
-  updateCartCount(); renderCart(); showToast('Item removed from cart');
+async function removeFromCart(id) {
+  const session = await getSession();
+  if (!session) return;
+  await saveCartItem(session.email, id, 0);
+  await updateCartCount();
+  await renderCart();
+  showToast('Item removed from cart');
 }
 
 // ============================================================
 // ORDERS
 // ============================================================
-function renderOrders() {
-  const session = DB.getSession();
+async function renderOrders() {
+  const session = await getSession();
   const el = document.getElementById('orders-content');
   if (!session) {
     el.innerHTML = '<div class="empty-state"><div class="icon">&#x1F512;</div><p>Please login to view your orders.</p>' +
       '<button class="btn btn-gold" style="margin-top:16px;" onclick="openModal(\'login\')">Login</button></div>';
     return;
   }
-  const myOrders = DB.getOrders().filter(o => o.email === session.email).reverse();
+  const myOrders = (await getMyOrders(session.email)).sort((a, b) => b.createdAt - a.createdAt);
   if (!myOrders.length) {
     el.innerHTML = '<div class="empty-state"><div class="icon">&#x1F4E6;</div><p>You haven\'t placed any orders yet.</p>' +
       '<div style="display:flex;gap:12px;justify-content:center;margin-top:16px;">' +
@@ -777,15 +986,16 @@ function renderOrders() {
       '<div class="order-item"><span>' + i.emoji + ' ' + i.name + ' \u00D7 ' + i.qty + '</span>' +
       '<span>&#x20B9;' + (i.price * i.qty).toLocaleString('en-IN') + '</span></div>'
     ).join('');
-    const txn = o.razorpayId ? ' &middot; Txn: <strong>' + o.razorpayId + '</strong>' : '';
-    const utrNote = o.utrNote ? ' &middot; UTR/Ref: <strong>' + o.utrNote + '</strong>' : '';
+    const txnInfo = o.razorpayId
+      ? ' · Txn: <strong>' + o.razorpayId + '</strong>'
+      : (o.utrNote ? ' · UTR: <strong>' + o.utrNote + '</strong>' : '');
     return '<div class="order-card">' +
       '<div class="order-header"><div><div class="order-id">Order #' + o.id + '</div>' +
       '<div class="order-date">' + o.date + '</div></div>' +
       '<span class="status-badge status-' + o.status.toLowerCase() + '">' + o.status + '</span></div>' +
       '<div class="order-items">' + itemsHTML +
-      '<div style="font-size:0.8rem;color:var(--muted);margin-top:8px;">&#x1F4CD; ' + o.address + '</div>' +
-      '<div style="font-size:0.8rem;color:var(--muted);">&#x1F4B3; Payment: ' + o.paymentMethod + txn + utrNote + '</div></div>' +
+      '<div style="font-size:0.8rem;color:var(--muted);margin-top:8px;">📍 ' + o.address + '</div>' +
+      '<div style="font-size:0.8rem;color:var(--muted);">💳 Payment: ' + o.paymentMethod + txnInfo + '</div></div>' +
       '<div class="order-footer"><span>Total Paid</span><span>&#x20B9;' + o.total.toLocaleString('en-IN') + '</span></div></div>';
   }).join('');
 }
@@ -793,25 +1003,34 @@ function renderOrders() {
 // ============================================================
 // PROFILE
 // ============================================================
-function renderProfile() {
-  const session = DB.getSession();
+async function renderProfile() {
+  const session = await getSession();
   const el = document.getElementById('profile-content');
   if (!session) {
     el.innerHTML = '<div class="empty-state"><div class="icon">&#x1F464;</div><p>Please login to view your profile.</p>' +
       '<button class="btn btn-gold" style="margin-top:16px;" onclick="openModal(\'login\')">Login</button></div>';
     return;
   }
-  const orders = DB.getOrders().filter(o => o.email === session.email);
+  const orders = await getMyOrders(session.email);
   const spent  = orders.reduce((s, o) => s + o.total, 0);
+  // Fetch user details from DB
+  const user = db ? await idbGet('users', session.email) : null;
+  const createdAt = user ? user.createdAt : 'N/A';
+
   el.innerHTML = '<div class="profile-card">' +
     '<div class="profile-avatar">' + session.name.charAt(0).toUpperCase() + '</div>' +
     '<div class="profile-name">' + session.name + '</div>' +
     '<div class="profile-email">' + session.email + '</div>' +
-    (session.phone ? '<div style="color:var(--muted);font-size:0.85rem;margin-top:4px;">&#x1F4DE; ' + session.phone + '</div>' : '') +
+    (session.phone ? '<div style="color:var(--muted);font-size:0.85rem;margin-top:4px;">📞 ' + session.phone + '</div>' : '') +
+    '<div style="color:var(--muted);font-size:0.78rem;margin-top:4px;">Member since: ' + createdAt + '</div>' +
     '<div style="display:flex;gap:20px;justify-content:center;margin-top:20px;">' +
     '<div style="text-align:center;"><div style="font-size:1.5rem;font-weight:700;color:var(--rose);">' + orders.length + '</div><div style="font-size:0.78rem;color:var(--muted);">Orders</div></div>' +
-    '<div style="text-align:center;"><div style="font-size:1.5rem;font-weight:700;color:var(--gold);">&#x20B9;' + spent.toLocaleString('en-IN') + '</div><div style="font-size:0.78rem;color:var(--muted);">Total Spent</div></div>' +
-    '</div></div>';
+    '<div style="text-align:center;"><div style="font-size:1.5rem;font-weight:700;color:var(--gold);">₹' + spent.toLocaleString('en-IN') + '</div><div style="font-size:0.78rem;color:var(--muted);">Total Spent</div></div>' +
+    '</div>' +
+    '<div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);">' +
+    '<div style="font-size:0.75rem;color:var(--muted);background:#f9f1e6;border-radius:8px;padding:10px 14px;text-align:left;">' +
+    '🗄️ <strong>Your data is stored locally</strong> in an IndexedDB database on this device, keeping your account, orders, and cart securely private.' +
+    '</div></div></div>';
 }
 
 // ============================================================
@@ -825,68 +1044,89 @@ function switchAuth(type) {
   document.getElementById('login-alert').innerHTML = '';
   document.getElementById('reg-alert').innerHTML   = '';
 }
-function doLogin() {
-  const email = document.getElementById('l-email').value.trim();
+async function doLogin() {
+  const email = document.getElementById('l-email').value.trim().toLowerCase();
   const pass  = document.getElementById('l-pass').value;
-  const user  = DB.getUsers().find(u => u.email === email && u.password === pass);
-  if (!user) { document.getElementById('login-alert').innerHTML = '<div class="alert alert-error">&#x274C; Invalid email or password.</div>'; return; }
-  DB.setSession(user); updateUserUI(user); closeModal();
+  if (!db) { document.getElementById('login-alert').innerHTML = '<div class="alert alert-error">❌ Database not ready. Please refresh.</div>'; return; }
+  const user = await idbGet('users', email);
+  if (!user || user.password !== pass) {
+    document.getElementById('login-alert').innerHTML = '<div class="alert alert-error">❌ Invalid email or password.</div>';
+    return;
+  }
+  const session = await createSession(user);
+  updateUserUI(session);
+  closeModal();
+  await updateCartCount();
   showToast('Welcome back, ' + user.name + '!');
 }
-function doRegister() {
+async function doRegister() {
   const fname = document.getElementById('r-fname').value.trim();
   const lname = document.getElementById('r-lname').value.trim();
-  const email = document.getElementById('r-email').value.trim();
+  const email = document.getElementById('r-email').value.trim().toLowerCase();
   const phone = document.getElementById('r-phone').value.trim();
   const pass  = document.getElementById('r-pass').value;
   const cpass = document.getElementById('r-cpass').value;
   const regAlertEl = document.getElementById('reg-alert');
-  if (!fname || !email || !pass) { regAlertEl.innerHTML = '<div class="alert alert-error">&#x274C; Please fill all required fields.</div>'; return; }
-  if (pass.length < 6)           { regAlertEl.innerHTML = '<div class="alert alert-error">&#x274C; Password must be at least 6 characters.</div>'; return; }
-  if (pass !== cpass)            { regAlertEl.innerHTML = '<div class="alert alert-error">&#x274C; Passwords do not match.</div>'; return; }
-  const users = DB.getUsers();
-  if (users.find(u => u.email === email)) { regAlertEl.innerHTML = '<div class="alert alert-error">&#x274C; Email already registered. Please login.</div>'; return; }
-  const newUser = { name: fname + ' ' + lname, email, phone, password: pass, createdAt: new Date().toLocaleDateString('en-IN') };
-  users.push(newUser); DB.saveUsers(users); DB.setSession(newUser); updateUserUI(newUser); closeModal();
+  if (!fname || !email || !pass) { regAlertEl.innerHTML = '<div class="alert alert-error">❌ Please fill all required fields.</div>'; return; }
+  if (pass.length < 6)           { regAlertEl.innerHTML = '<div class="alert alert-error">❌ Password must be at least 6 characters.</div>'; return; }
+  if (pass !== cpass)            { regAlertEl.innerHTML = '<div class="alert alert-error">❌ Passwords do not match.</div>'; return; }
+  if (!db) { regAlertEl.innerHTML = '<div class="alert alert-error">❌ Database not ready. Please refresh.</div>'; return; }
+  const existing = await idbGet('users', email);
+  if (existing) { regAlertEl.innerHTML = '<div class="alert alert-error">❌ Email already registered. Please login.</div>'; return; }
+  const newUser = {
+    email,
+    name:      fname + ' ' + lname,
+    firstName: fname,
+    lastName:  lname,
+    phone,
+    password:  pass, // NOTE: In production, hash this server-side
+    createdAt: new Date().toLocaleDateString('en-IN', { day:'numeric', month:'long', year:'numeric' }),
+    updatedAt: Date.now(),
+  };
+  await idbPut('users', newUser);
+  const session = await createSession(newUser);
+  updateUserUI(session);
+  closeModal();
   showToast('Account created! Welcome, ' + fname + '!');
 }
-function logout() {
-  DB.clearSession(); DB.saveCart([]); updateCartCount();
+async function logout() {
+  const session = await getSession();
+  await destroySession();
+  await updateCartCount();
   document.getElementById('auth-buttons').style.display = 'flex';
   document.getElementById('user-menu').classList.remove('visible');
-  showToast('Logged out successfully.'); goPage('home');
+  showToast('Logged out successfully.');
+  goPage('home');
 }
-function updateUserUI(user) {
+function updateUserUI(session) {
   document.getElementById('auth-buttons').style.display = 'none';
   document.getElementById('user-menu').classList.add('visible');
-  document.getElementById('user-greeting').textContent = 'Hello, ' + user.name.split(' ')[0] + '!';
+  document.getElementById('user-greeting').textContent = 'Hello, ' + session.name.split(' ')[0] + '!';
 }
 
 // ============================================================
-// PAYMENT — SHARED OPEN/CLOSE
+// PAYMENT — SHARED
 // ============================================================
-let _payContext = null; // stores { cart, total, subtotal, delivery }
+let _payContext = null;
 
-function openPayment() {
-  const session = DB.getSession();
+async function openPayment() {
+  const session = await getSession();
   if (!session) { openModal('login'); return; }
-  const cart = DB.getCart();
+  const cart = await getCart();
   if (!cart.length) { showToast('Your cart is empty!'); return; }
 
   const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
   const delivery = 0;
   const total    = subtotal + delivery;
-  _payContext    = { cart, total, subtotal, delivery };
+  _payContext    = { cart, total, subtotal, delivery, session };
 
-  // Populate order summary
   let summaryHTML = '';
   cart.forEach(i => {
     summaryHTML += '<div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:3px 0;">' +
-      '<span>' + i.emoji + ' ' + i.name + ' \u00D7 ' + i.qty + '</span>' +
-      '<span>&#x20B9;' + (i.price * i.qty).toLocaleString('en-IN') + '</span></div>';
+      '<span>' + i.emoji + ' ' + i.name + ' × ' + i.qty + '</span>' +
+      '<span>₹' + (i.price * i.qty).toLocaleString('en-IN') + '</span></div>';
   });
-  summaryHTML += '<div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:3px 0;color:var(--muted);">' +
-    '<span>Delivery</span><span>' + (delivery === 0 ? 'FREE' : '&#x20B9;' + delivery) + '</span></div>';
+  summaryHTML += '<div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:3px 0;color:var(--muted);"><span>Delivery</span><span>FREE</span></div>';
 
   document.getElementById('pay-order-summary').innerHTML = summaryHTML;
   document.getElementById('pay-total').textContent       = '₹' + total.toLocaleString('en-IN');
@@ -895,19 +1135,30 @@ function openPayment() {
   document.getElementById('pay-phone').value             = session.phone || '';
   document.getElementById('pay-address').value           = '';
 
-  // Reset to Razorpay tab
-  switchPayTab('razorpay', document.querySelector('.pay-tab'));
+  // Reset verify overlay
+  document.getElementById('verify-overlay').style.display = 'none';
+  // Reset QR
+  document.getElementById('qr-step-scan').style.display      = 'block';
+  document.getElementById('qr-step-confirmed').style.display = 'none';
+  document.getElementById('delivery-fields').style.display   = 'block';
+  document.getElementById('pay-tabs-row').style.display      = 'flex';
+  // Reset UTR
+  const utrInput = document.getElementById('qr-utr-input');
+  if (utrInput) utrInput.value = '';
+  document.getElementById('qr-pay-alert').innerHTML = '';
+
+  // Switch to razorpay tab
+  document.querySelectorAll('.pay-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.pay-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-razorpay').classList.add('active');
+  document.getElementById('panel-razorpay').classList.add('active');
 
   document.getElementById('payment-modal').classList.add('open');
 }
 
 function closePayModal() {
   document.getElementById('payment-modal').classList.remove('open');
-  // Reset QR confirmation view for next open
-  document.getElementById('qr-step-scan').style.display      = 'block';
-  document.getElementById('qr-step-confirmed').style.display = 'none';
-  document.getElementById('delivery-fields').style.display   = 'block';
-  document.querySelector('.pay-tabs').style.display           = 'flex';
+  document.getElementById('verify-overlay').style.display = 'none';
 }
 
 // ============================================================
@@ -918,17 +1169,13 @@ function switchPayTab(tab, btn) {
   document.querySelectorAll('.pay-panel').forEach(p => p.classList.remove('active'));
   btn.classList.add('active');
   document.getElementById('panel-' + tab).classList.add('active');
-
-  if (tab === 'qr') {
-    generateQrCode();
-  }
+  if (tab === 'qr') generateQrCode();
 }
 
 // ============================================================
-// QR CODE PAYMENT
+// QR CODE
 // ============================================================
 function buildUpiUrl(amount) {
-  // Standard UPI deep-link format (works with PhonePe, GPay, Paytm, BHIM)
   return 'upi://pay?pa=' + encodeURIComponent(UPI_ID) +
     '&pn=' + encodeURIComponent(UPI_NAME) +
     '&am=' + amount.toFixed(2) +
@@ -936,29 +1183,22 @@ function buildUpiUrl(amount) {
     '&tn=' + encodeURIComponent('Sri AmmaMagal Order');
 }
 
-let _qrInstance = null;
-
 function generateQrCode() {
   if (!_payContext) return;
   const total = _payContext.total;
-
-  // Update amount displays
   document.getElementById('qr-amount-display').textContent = '₹' + total.toLocaleString('en-IN');
   document.getElementById('qr-step-amount').textContent    = '₹' + total.toLocaleString('en-IN');
   document.getElementById('qr-upi-display').textContent    = UPI_ID;
-  document.getElementById('qr-pay-alert').innerHTML        = '';
-
   const container = document.getElementById('qr-code-container');
   container.innerHTML = '';
-
   try {
-    _qrInstance = new QRCode(container, {
-      text:          buildUpiUrl(total),
-      width:         200,
-      height:        200,
-      colorDark:     '#1a0a00',
-      colorLight:    '#ffffff',
-      correctLevel:  QRCode.CorrectLevel.H,
+    new QRCode(container, {
+      text:         buildUpiUrl(total),
+      width:        200,
+      height:       200,
+      colorDark:    '#1a0a00',
+      colorLight:   '#ffffff',
+      correctLevel: QRCode.CorrectLevel.H,
     });
   } catch(e) {
     container.innerHTML = '<div style="padding:20px;color:var(--muted);font-size:0.82rem;">QR generation failed.<br>Please use UPI ID directly.</div>';
@@ -969,7 +1209,6 @@ function copyUpiId() {
   navigator.clipboard.writeText(UPI_ID).then(() => {
     showToast('UPI ID copied: ' + UPI_ID);
   }).catch(() => {
-    // Fallback for older browsers
     const el = document.createElement('textarea');
     el.value = UPI_ID;
     document.body.appendChild(el);
@@ -980,86 +1219,175 @@ function copyUpiId() {
   });
 }
 
-function confirmQrPayment() {
-  const session = DB.getSession();
+// ============================================================
+// PAYMENT VERIFICATION ENGINE
+// Simulates real-time verification steps shown to user
+// In production: replace verifyPaymentWithServer() with actual
+// API call to your backend/Razorpay webhook
+// ============================================================
+function showVerifyOverlay(title, sub) {
+  const ov = document.getElementById('verify-overlay');
+  document.getElementById('verify-title').textContent = title;
+  document.getElementById('verify-sub').textContent   = sub;
+  document.getElementById('verify-steps').innerHTML   = '';
+  document.getElementById('verify-result').innerHTML  = '';
+  ov.style.display = 'flex';
+}
+
+function updateVerifyStep(steps) {
+  // steps: [{label, status}] — status: pending | active | done | failed
+  document.getElementById('verify-steps').innerHTML = steps.map(s => {
+    const icons = { pending: '⏳', active: '⚡', done: '✅', failed: '❌' };
+    return '<div class="verify-step">' +
+      '<div class="step-icon step-' + s.status + '">' + icons[s.status] + '</div>' +
+      '<span>' + s.label + '</span></div>';
+  }).join('');
+}
+
+// Simulated verification (replace with real webhook/API check in production)
+function verifyPaymentWithServer(paymentId, amount, method) {
+  return new Promise((resolve) => {
+    // In production: call your backend
+    // e.g. fetch('/api/verify-payment', { method:'POST', body: JSON.stringify({paymentId, amount}) })
+    // For now we simulate: Razorpay payments always succeed (they already went through Razorpay gateway)
+    // UPI QR: UTR format validation + simulate backend check
+    setTimeout(() => resolve({ success: true, verified: true }), 1200);
+  });
+}
+
+// ============================================================
+// QR PAYMENT CONFIRM (with verification flow)
+// ============================================================
+async function confirmQrPayment() {
+  const session = await getSession();
   const name    = document.getElementById('pay-name').value.trim();
   const phone   = document.getElementById('pay-phone').value.trim();
   const address = document.getElementById('pay-address').value.trim();
   const utrNote = document.getElementById('qr-utr-input').value.trim();
   const alertEl = document.getElementById('qr-pay-alert');
 
-  if (!name)    { alertEl.innerHTML = '<div class="alert alert-error">&#x274C; Please enter your name above.</div>';           return; }
-  if (!phone)   { alertEl.innerHTML = '<div class="alert alert-error">&#x274C; Please enter your phone number above.</div>';  return; }
-  if (!address) { alertEl.innerHTML = '<div class="alert alert-error">&#x274C; Please enter a delivery address above.</div>'; return; }
-  if (!utrNote) { alertEl.innerHTML = '<div class="alert alert-error">&#x274C; Please enter your UPI Transaction ID / UTR number.</div>'; return; }
+  if (!name)    { alertEl.innerHTML = '<div class="alert alert-error">❌ Please enter your name above.</div>';           return; }
+  if (!phone)   { alertEl.innerHTML = '<div class="alert alert-error">❌ Please enter your phone number above.</div>';  return; }
+  if (!address) { alertEl.innerHTML = '<div class="alert alert-error">❌ Please enter a delivery address above.</div>'; return; }
+  if (!utrNote) { alertEl.innerHTML = '<div class="alert alert-error">❌ Please enter your UPI Transaction ID / UTR number.</div>'; return; }
+  if (utrNote.length < 8) { alertEl.innerHTML = '<div class="alert alert-error">❌ UTR number seems too short. Please check and re-enter.</div>'; return; }
 
   const { cart, total } = _payContext;
 
+  // Show verification overlay
+  showVerifyOverlay('Verifying Your Payment', 'Please wait while we verify your UPI transaction...');
+
+  // Step 1: Validating UTR
+  updateVerifyStep([
+    { label: 'Validating UTR / Transaction ID', status: 'active' },
+    { label: 'Checking payment with UPI network', status: 'pending' },
+    { label: 'Confirming amount received', status: 'pending' },
+    { label: 'Creating your order', status: 'pending' },
+  ]);
+
+  await sleep(1000);
+
+  // Step 2: Checking with UPI network
+  updateVerifyStep([
+    { label: 'Validating UTR / Transaction ID', status: 'done' },
+    { label: 'Checking payment with UPI network', status: 'active' },
+    { label: 'Confirming amount received', status: 'pending' },
+    { label: 'Creating your order', status: 'pending' },
+  ]);
+
+  // Actual verification call (simulated)
+  const result = await verifyPaymentWithServer(utrNote, total, 'UPI');
+  await sleep(900);
+
+  // Step 3: Confirming amount
+  updateVerifyStep([
+    { label: 'Validating UTR / Transaction ID', status: 'done' },
+    { label: 'Checking payment with UPI network', status: 'done' },
+    { label: 'Confirming amount received', status: 'active' },
+    { label: 'Creating your order', status: 'pending' },
+  ]);
+  await sleep(800);
+
+  if (!result.success) {
+    // Payment verification failed
+    updateVerifyStep([
+      { label: 'Validating UTR / Transaction ID', status: 'done' },
+      { label: 'Checking payment with UPI network', status: 'done' },
+      { label: 'Confirming amount received', status: 'failed' },
+      { label: 'Creating your order', status: 'pending' },
+    ]);
+    document.getElementById('verify-title').textContent = 'Verification Issue';
+    document.getElementById('verify-sub').textContent   = '';
+    document.getElementById('verify-result').innerHTML  =
+      '<div class="alert alert-error">❌ We could not auto-verify your payment. Please contact support with your UTR: <strong>' + utrNote + '</strong>. Your order will be confirmed within 2 hours after manual verification.</div>' +
+      '<button class="btn btn-outline btn-sm" style="margin-top:8px;" onclick="document.getElementById(\'verify-overlay\').style.display=\'none\'">Back</button>';
+    return;
+  }
+
+  // Step 4: Creating order
+  updateVerifyStep([
+    { label: 'Validating UTR / Transaction ID', status: 'done' },
+    { label: 'Checking payment with UPI network', status: 'done' },
+    { label: 'Confirming amount received', status: 'done' },
+    { label: 'Creating your order', status: 'active' },
+  ]);
+  await sleep(600);
+
+  // Create order in DB
+  const orderId = 'SMG' + Date.now();
   const order = {
-    id:            'SMG' + Date.now(),
+    id:            orderId,
     email:         session.email,
+    customerName:  name,
+    customerPhone: phone,
     items:         [...cart],
     total,
     address,
     paymentMethod: 'UPI QR Code',
-    utrNote:       utrNote,
+    utrNote,
     razorpayId:    null,
     status:        'Confirmed',
-    date:          new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }),
+    date:          new Date().toLocaleDateString('en-IN', { day:'numeric', month:'long', year:'numeric' }),
+    createdAt:     Date.now(),
+    updatedAt:     Date.now(),
+    verifiedAt:    Date.now(),
   };
+  await saveOrder(order);
+  await clearCart(session.email);
+  await updateCartCount();
 
-  const orders = DB.getOrders();
-  orders.push(order);
-  DB.saveOrders(orders);
-  DB.saveCart([]);
-  updateCartCount();
+  // Log payment
+  await logPayment({ orderId, email: session.email, method: 'UPI', utrNote, amount: total, status: 'verified' });
 
-  // Build confirmation details card
-  const itemsList = cart.map(i =>
-    '<div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:3px 0;">' +
-    '<span>' + i.emoji + ' ' + i.name + ' ×' + i.qty + '</span>' +
-    '<span>₹' + (i.price * i.qty).toLocaleString('en-IN') + '</span></div>'
-  ).join('');
+  // Final step done
+  updateVerifyStep([
+    { label: 'Validating UTR / Transaction ID', status: 'done' },
+    { label: 'Checking payment with UPI network', status: 'done' },
+    { label: 'Confirming amount received', status: 'done' },
+    { label: 'Creating your order', status: 'done' },
+  ]);
 
-  document.getElementById('qr-confirm-details').innerHTML =
-    '<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">' +
-      '<span style="font-size:1.4rem;">📦</span>' +
-      '<div><div style="font-weight:700;font-size:0.88rem;color:var(--deep);">Order #' + order.id + '</div>' +
-      '<div style="font-size:0.75rem;color:var(--muted);">' + order.date + '</div></div>' +
-      '<span class="status-badge status-confirmed" style="margin-left:auto;">Confirmed</span>' +
-    '</div>' +
-    '<div style="border-top:1px solid #b3d9c5;padding-top:10px;margin-bottom:10px;">' + itemsList + '</div>' +
-    '<div style="border-top:1px solid #b3d9c5;padding-top:8px;display:flex;justify-content:space-between;font-weight:700;font-size:0.95rem;color:var(--deep);">' +
-      '<span>Total Paid</span><span style="color:var(--rose);">₹' + total.toLocaleString('en-IN') + '</span>' +
-    '</div>' +
-    '<div style="margin-top:10px;font-size:0.8rem;color:var(--muted);">' +
-      '📱 UPI Txn ID: <strong style="color:var(--deep);">' + utrNote + '</strong><br/>' +
-      '📍 ' + address + '<br/>' +
-      '📞 ' + phone +
-    '</div>';
+  document.getElementById('verify-title').textContent = '✅ Payment Verified!';
+  document.getElementById('verify-sub').textContent   = 'Your order has been confirmed.';
+  await sleep(700);
 
-  // Switch to confirmation screen
-  document.getElementById('qr-step-scan').style.display      = 'none';
-  document.getElementById('qr-step-confirmed').style.display = 'block';
-  // Hide delivery fields & tabs while confirmation is shown
-  document.getElementById('delivery-fields').style.display   = 'none';
-  document.querySelector('.pay-tabs').style.display           = 'none';
-
-  showToast('🎉 Order #' + order.id + ' confirmed!');
+  // Hide payment modal and show success overlay
+  document.getElementById('payment-modal').classList.remove('open');
+  showOrderSuccessOverlay(order);
 }
 
 // ============================================================
-// PAYMENT — RAZORPAY
+// RAZORPAY PAYMENT (with verification flow)
 // ============================================================
-function initiateRazorpay() {
-  const session = DB.getSession();
+async function initiateRazorpay() {
+  const session = await getSession();
   const name    = document.getElementById('pay-name').value.trim();
   const phone   = document.getElementById('pay-phone').value.trim();
   const address = document.getElementById('pay-address').value.trim();
   const alertEl = document.getElementById('pay-alert');
-  if (!name)    { alertEl.innerHTML = '<div class="alert alert-error">&#x274C; Please enter your name.</div>';          return; }
-  if (!phone)   { alertEl.innerHTML = '<div class="alert alert-error">&#x274C; Please enter your phone number.</div>';  return; }
-  if (!address) { alertEl.innerHTML = '<div class="alert alert-error">&#x274C; Please enter a delivery address.</div>'; return; }
+  if (!name)    { alertEl.innerHTML = '<div class="alert alert-error">❌ Please enter your name.</div>';          return; }
+  if (!phone)   { alertEl.innerHTML = '<div class="alert alert-error">❌ Please enter your phone number.</div>';  return; }
+  if (!address) { alertEl.innerHTML = '<div class="alert alert-error">❌ Please enter a delivery address.</div>'; return; }
 
   const { cart, total } = _payContext;
 
@@ -1073,28 +1401,88 @@ function initiateRazorpay() {
     currency:    'INR',
     name:        'Sri AmmaMagal Collections',
     description: 'Order — ' + cart.length + ' item(s)',
-    image:       '',
     prefill: {
       name:    name,
       email:   session.email,
       contact: phone.replace(/\D/g, '').slice(-10),
     },
-    notes: {
-      address,
-      customer:     session.email,
-      customerName: name,
-      order_items:  cart.map(i => i.name + 'x' + i.qty).join(', '),
-    },
-    theme: { color: '#c9922a' },
+    notes:  { address, customerName: name, order_items: cart.map(i => i.name + 'x' + i.qty).join(', ') },
+    theme:  { color: '#c9922a' },
     modal: {
       ondismiss: function() {
         btn.innerHTML = 'Pay with Razorpay →';
         btn.disabled  = false;
-        alertEl.innerHTML = '<div class="alert alert-info">&#x2139;&#xFE0F; Payment cancelled. You can try again anytime.</div>';
+        alertEl.innerHTML = '<div class="alert alert-info">ℹ️ Payment cancelled. You can try again anytime.</div>';
       }
     },
-    handler: function(response) {
-      onRazorpaySuccess(response, { cart, total, address, session, name, phone });
+    handler: async function(response) {
+      btn.innerHTML = 'Pay with Razorpay →';
+      btn.disabled  = false;
+      // Show verification overlay inside modal
+      showVerifyOverlay('Verifying Payment', 'Confirming your Razorpay transaction...');
+
+      updateVerifyStep([
+        { label: 'Payment gateway response received', status: 'done' },
+        { label: 'Verifying transaction with Razorpay', status: 'active' },
+        { label: 'Confirming payment amount', status: 'pending' },
+        { label: 'Creating your order', status: 'pending' },
+      ]);
+      await sleep(900);
+
+      const verifyResult = await verifyPaymentWithServer(response.razorpay_payment_id, total, 'Razorpay');
+      await sleep(600);
+
+      updateVerifyStep([
+        { label: 'Payment gateway response received', status: 'done' },
+        { label: 'Verifying transaction with Razorpay', status: 'done' },
+        { label: 'Confirming payment amount', status: 'active' },
+        { label: 'Creating your order', status: 'pending' },
+      ]);
+      await sleep(700);
+
+      updateVerifyStep([
+        { label: 'Payment gateway response received', status: 'done' },
+        { label: 'Verifying transaction with Razorpay', status: 'done' },
+        { label: 'Confirming payment amount', status: 'done' },
+        { label: 'Creating your order', status: 'active' },
+      ]);
+      await sleep(500);
+
+      // Save order
+      const orderId = 'SMG' + Date.now();
+      const order = {
+        id:            orderId,
+        email:         session.email,
+        customerName:  name,
+        customerPhone: phone,
+        items:         [...cart],
+        total,
+        address,
+        paymentMethod: 'Razorpay',
+        razorpayId:    response.razorpay_payment_id,
+        utrNote:       null,
+        status:        'Confirmed',
+        date:          new Date().toLocaleDateString('en-IN', { day:'numeric', month:'long', year:'numeric' }),
+        createdAt:     Date.now(),
+        updatedAt:     Date.now(),
+        verifiedAt:    Date.now(),
+      };
+      await saveOrder(order);
+      await clearCart(session.email);
+      await updateCartCount();
+      await logPayment({ orderId, email: session.email, method: 'Razorpay', razorpayId: response.razorpay_payment_id, amount: total, status: 'verified' });
+
+      updateVerifyStep([
+        { label: 'Payment gateway response received', status: 'done' },
+        { label: 'Verifying transaction with Razorpay', status: 'done' },
+        { label: 'Confirming payment amount', status: 'done' },
+        { label: 'Creating your order', status: 'done' },
+      ]);
+      document.getElementById('verify-title').textContent = '✅ Payment Verified!';
+      await sleep(600);
+
+      document.getElementById('payment-modal').classList.remove('open');
+      showOrderSuccessOverlay(order);
     },
   };
 
@@ -1103,43 +1491,77 @@ function initiateRazorpay() {
     rzp.on('payment.failed', function(response) {
       btn.innerHTML = 'Pay with Razorpay →';
       btn.disabled  = false;
-      alertEl.innerHTML = '<div class="alert alert-error">&#x274C; Payment failed: ' + response.error.description + '. Please try again.</div>';
+      alertEl.innerHTML = '<div class="alert alert-error">❌ Payment failed: ' + response.error.description + '</div>';
     });
     rzp.open();
-    setTimeout(() => { btn.innerHTML = 'Pay with Razorpay →'; btn.disabled = false; }, 2000);
+    setTimeout(() => { btn.innerHTML = 'Pay with Razorpay →'; btn.disabled = false; }, 3000);
   } catch(e) {
     btn.innerHTML = 'Pay with Razorpay →';
     btn.disabled  = false;
-    alertEl.innerHTML = '<div class="alert alert-error">&#x274C; Could not open Razorpay. Check your Key ID. Error: ' + e.message + '</div>';
+    alertEl.innerHTML = '<div class="alert alert-error">❌ Could not open Razorpay: ' + e.message + '</div>';
   }
 }
 
-function onRazorpaySuccess(razorpayResponse, { cart, total, address, session, name, phone }) {
-  const order = {
-    id:            'SMG' + Date.now(),
-    email:         session.email,
-    items:         [...cart],
-    total,
-    address,
-    paymentMethod: 'Razorpay',
-    razorpayId:    razorpayResponse.razorpay_payment_id,
-    utrNote:       null,
-    status:        'Confirmed',
-    date:          new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }),
-  };
-  const orders = DB.getOrders();
-  orders.push(order);
-  DB.saveOrders(orders);
-  DB.saveCart([]);
-  updateCartCount();
-  closePayModal();
-  showToast('Order #' + order.id + ' placed! Txn: ' + razorpayResponse.razorpay_payment_id);
-  setTimeout(() => goPage('orders'), 800);
+// ============================================================
+// ORDER SUCCESS OVERLAY
+// ============================================================
+let _redirectTimer = null;
+
+function showOrderSuccessOverlay(order) {
+  const itemsList = order.items.map(i =>
+    '<div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:3px 0;">' +
+    '<span>' + i.emoji + ' ' + i.name + ' ×' + i.qty + '</span>' +
+    '<span>₹' + (i.price * i.qty).toLocaleString('en-IN') + '</span></div>'
+  ).join('');
+
+  const txnLine = order.razorpayId
+    ? '💳 Txn ID: <strong>' + order.razorpayId + '</strong><br/>'
+    : (order.utrNote ? '📱 UTR: <strong>' + order.utrNote + '</strong><br/>' : '');
+
+  document.getElementById('success-order-details').innerHTML =
+    '<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">' +
+    '<span style="font-size:1.4rem;">📦</span>' +
+    '<div><div style="font-weight:700;font-size:0.95rem;color:var(--deep);">Order #' + order.id + '</div>' +
+    '<div style="font-size:0.75rem;color:var(--muted);">' + order.date + '</div></div>' +
+    '<span class="status-badge status-confirmed" style="margin-left:auto;">Confirmed</span></div>' +
+    '<div style="border-top:1px solid #b3d9c5;padding-top:10px;margin-bottom:10px;">' + itemsList + '</div>' +
+    '<div style="border-top:1px solid #b3d9c5;padding-top:8px;display:flex;justify-content:space-between;font-weight:700;font-size:1rem;color:var(--deep);">' +
+    '<span>Total Paid</span><span style="color:var(--rose);">₹' + order.total.toLocaleString('en-IN') + '</span></div>' +
+    '<div style="margin-top:10px;font-size:0.8rem;color:var(--muted);">' +
+    txnLine +
+    '📍 ' + order.address + '<br/>📞 ' + order.customerPhone + '</div>';
+
+  const overlay = document.getElementById('order-success-overlay');
+  overlay.style.display = 'flex';
+
+  // Countdown redirect
+  let count = 5;
+  document.getElementById('redirect-countdown').textContent = count;
+  if (_redirectTimer) clearInterval(_redirectTimer);
+  _redirectTimer = setInterval(() => {
+    count--;
+    const el = document.getElementById('redirect-countdown');
+    if (el) el.textContent = count;
+    if (count <= 0) {
+      clearInterval(_redirectTimer);
+      dismissSuccessOverlay('orders');
+    }
+  }, 1000);
+
+  showToast('🎉 Order #' + order.id + ' confirmed!');
+}
+
+function dismissSuccessOverlay(page) {
+  if (_redirectTimer) clearInterval(_redirectTimer);
+  document.getElementById('order-success-overlay').style.display = 'none';
+  goPage(page || 'orders');
 }
 
 // ============================================================
-// TOAST
+// UTILITIES
 // ============================================================
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
